@@ -1,6 +1,3 @@
-Here is the full tutorial in Markdown format, ready for you to host on GitHub:
-
-```markdown
 # 🚀 Getting Started with ESP32-C6 and Arduino IDE
 
 This guide helps you set up your **ESP32-C6 development board** with the **Arduino IDE** and run a basic **blink test** to verify everything is working.
@@ -100,8 +97,3 @@ delay(500);
 Your ESP32-C6 is now running its first Arduino sketch! You're ready to explore more examples using BLE, Wi-Fi, LoRa, and sensors.
 
 Happy hacking! 🔧💡
-
-```
-
-Let me know if you'd like to add BLE or Wi-Fi setup in a follow-up tutorial in the same format.
-```
