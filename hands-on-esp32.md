@@ -145,7 +145,11 @@ You’ve just:
 
 You're now ready to explore more — including Wi-Fi, sensors, and later, BLE.
 
-## 📡 Step 5: Wi-Fi Scanner
+## Step 5: Brightspace Quiz
+
+Take the L4.Q1 quiz available on Brightspace.
+
+## 📡 Step 6: Wi-Fi Scanner
 
 Scan nearby networks and display their signal strength:
 
