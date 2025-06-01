@@ -31,20 +31,9 @@ In this session, you'll:
 
 ## 📦 Step 2: Install ESP32-C6 Support
 
-1. Go to **File > Preferences** (or **Arduino > Settings** on macOS)
+1. Go to **Tools > Board > Boards Manager**
 
-2. Paste this URL in **“Additional Board Manager URLs”**:
-```
-
-[https://espressif.github.io/arduino-esp32/package\_esp32\_index.json](https://espressif.github.io/arduino-esp32/package_esp32_index.json)
-
-````
-
-3. Click **OK**
-
-4. Go to **Tools > Board > Boards Manager**
-
-5. Search for `esp32`, and install **“esp32 by Espressif Systems”**
+2. Search for `esp32`, and install **“esp32 by Espressif Systems”**
 
 ---
 
