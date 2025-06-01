@@ -204,7 +204,7 @@ WebServer server(80);
 
 void setup() {
   Serial.begin(115200);
-  WiFi.softAP("GroupA-NET", "12345678", 6); // Use channel 6 to reduce interference
+  WiFi.softAP("GroupA-NET", "12345678", 6); // Use channel 1, 6, or 11 to reduce interference
 
   Serial.println("📡 Access Point started");
   Serial.print("AP IP address: ");
