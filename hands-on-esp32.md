@@ -54,26 +54,96 @@ In this session, you'll:
 
 ## 💡 Step 4: Blink the LED
 
-1. Open **File > Examples > 01.Basics > Blink**
+In this step, you will upload your **first sketch** (program) to the ESP32-C6 board. This sketch turns an LED on and off at regular intervals — a simple but essential way to test that your development environment is correctly set up.
 
-2. Update to use **GPIO 8** (or 2/18 if needed):
+---
 
+### 🔹 1. Open the Blink Example
+
+1. In Arduino IDE, go to:
+```
+
+File > Examples > 01.Basics > Blink
+
+````
+
+2. A new window will open with the example code:
 ```cpp
 void setup() {
-  pinMode(8, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(8, HIGH);
-  delay(500);
-  digitalWrite(8, LOW);
-  delay(500);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1000);
 }
 ````
 
-3. Upload the code. The LED should blink!
+### 🔹 3. Compile and Upload
+
+1. Click the **checkmark button** (✓) to compile the code.
+
+2. Click the **right arrow button** (→) to upload the code to your board.
+
+3. Watch the output at the bottom of the IDE. You should see:
+
+   ```
+   Connecting...
+   Writing at 0x00001000...
+   Done uploading.
+   ```
+
+4. After uploading, the onboard LED should start **blinking once per second**.
 
 ---
+
+### 🔹 4. Understand the Code
+
+Let’s go line by line:
+
+```cpp
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+```
+
+* This runs **once** when the board starts.
+* It sets LED_BUILTIN as an **output pin**.
+
+```cpp
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+  delay(1000);                      // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+  delay(1000);                      // wait for a second
+}
+```
+
+* This loop runs **forever**.
+* It turns the LED **on**, waits 1 second, turns it **off**, waits 1 second — repeating endlessly.
+
+---
+
+### 🔹 5. Modify and Re-upload
+
+Try making the LED blink faster.
+
+Upload the modified code and observe how the blink speed changes.
+
+---
+
+### ✅ Success!
+
+You’ve just:
+
+* Uploaded your first program
+* Verified that your board is working
+* Practiced editing and testing Arduino code
+
+You're now ready to explore more — including Wi-Fi, sensors, and later, BLE.
 
 ## 📡 Step 5: Wi-Fi Scanner
 
