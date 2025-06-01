@@ -81,7 +81,7 @@ void loop() {
 }
 ````
 
-### 🔹 3. Compile and Upload
+### 🔹 2. Compile and Upload
 
 1. Click the **checkmark button** (✓) to compile the code.
 
@@ -99,7 +99,7 @@ void loop() {
 
 ---
 
-### 🔹 4. Understand the Code
+### 🔹 3. Understand the Code
 
 Let’s go line by line:
 
@@ -127,7 +127,7 @@ void loop() {
 
 ---
 
-### 🔹 5. Modify and Re-upload
+### 🔹 4. Modify and Re-upload
 
 Try making the LED blink faster.
 
@@ -153,8 +153,12 @@ Scan nearby networks and display their signal strength:
 #include <WiFi.h>
 
 void setup() {
+  
+}
+
+void loop() {
   Serial.begin(115200);
-  delay(1000);
+  delay(30000);
   Serial.println("🔍 Scanning for networks...");
 
   int n = WiFi.scanNetworks();
@@ -170,81 +174,9 @@ void setup() {
       bars.c_str());
   }
 }
-
-void loop() {}
 ```
 
 ✅ Use this to see Wi-Fi availability and RSSI feedback.
-
----
-
-## 🌐 Step 6: Wi-Fi Connect and Show IP
-
-Modify and upload this sketch to connect your ESP32 to Wi-Fi:
-
-```cpp
-#include <WiFi.h>
-
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
-
-void setup() {
-  Serial.begin(115200);
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting");
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(300);
-    Serial.print(".");
-  }
-
-  Serial.println("\n✅ Connected!");
-  Serial.print("IP Address: ");
-  Serial.println(WiFi.localIP());
-}
-
-void loop() {}
-```
-
-✅ Once connected, your ESP32 will print its IP address.
-
----
-
-## 📲 Step 7: ESP32 as Access Point + Web Page
-
-Turn your ESP32 into a local Wi-Fi network with a web server!
-
-```cpp
-#include <WiFi.h>
-#include <WebServer.h>
-
-WebServer server(80);
-
-void setup() {
-  Serial.begin(115200);
-  WiFi.softAP("ESP32-Hotspot");
-
-  Serial.print("Hotspot IP: ");
-  Serial.println(WiFi.softAPIP());
-
-  server.on("/", []() {
-    server.send(200, "text/html", "<h2>🎉 Hello from ESP32!</h2>");
-  });
-
-  server.begin();
-}
-
-void loop() {
-  server.handleClient();
-}
-```
-
-1. Upload this sketch
-2. Connect your laptop/phone to the **ESP32-Hotspot**
-3. Open browser and go to:
-   👉 `http://192.168.4.1`
-
-You should see a web page served by the board!
 
 ---
 
@@ -266,8 +198,6 @@ In this lab, you:
 * Installed Arduino IDE and ESP32 support
 * Flashed a **Blink** sketch
 * Scanned for Wi-Fi
-* Connected to a Wi-Fi network and saw the IP
-* Created your own access point + web server
 
 You're now ready for BLE and more advanced networking features!
 
