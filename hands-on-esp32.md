@@ -180,21 +180,122 @@ void loop() {
 }
 ```
 
-✅ Use this to see Wi-Fi availability and RSSI feedback.
+✅ Use this to see Wi-Fi availability and RSSI feedback. Comment the code and analyze the result.
 
 ---
 
-## 🛠️ Troubleshooting
+## 🌐 Step 7: Simple HTTP Server and Client Communication
 
-| Issue                          | Fix                                     |
-| ------------------------------ | --------------------------------------- |
-| No port visible                | Use a different cable or restart IDE    |
-| Upload stuck on “Connecting…”  | Hold **BOOT** button during upload      |
-| No LED blinking                | Try GPIO 2 or 18 instead of 8           |
-| ESP32 doesn’t connect to Wi-Fi | Double-check SSID/password, use 2.4 GHz |
+To wrap up this hands-on session, we’ll build a simple **HTTP server** using one ESP32 board, and connect to it first with a **smartphone browser**, then with another **ESP32 client**.
+
+This demonstrates how IoT devices can serve data and be queried over the network — just like tiny web servers.
 
 ---
 
+### 🅰️ Part 1: Group A sets up an HTTP Server (SoftAP)
+
+This code creates a Wi-Fi Access Point and starts a basic web server that responds with a short message.
+
+```cpp
+#include <WiFi.h>
+#include <WebServer.h>
+
+WebServer server(80);
+
+void setup() {
+  Serial.begin(115200);
+  WiFi.softAP("GroupA-NET", "12345678", 6); // Use channel 6 to reduce interference
+
+  Serial.println("📡 Access Point started");
+  Serial.print("AP IP address: ");
+  Serial.println(WiFi.softAPIP());
+
+  server.on("/", []() {
+    server.send(200, "text/html", "<h2>📨 Hello from Group A!</h2>");
+  });
+
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+}
+````
+
+After uploading:
+
+* The ESP32 becomes a Wi-Fi hotspot (`GroupA-NET`)
+* The IP address is typically `192.168.4.1`
+
+---
+
+### 📱 Part 2: Group B connects using a smartphone
+
+1. On a phone or laptop, go to **Wi-Fi settings**
+2. Connect to the network:
+
+   ```
+   SSID: GroupA-NET
+   Password: 12345678
+   ```
+3. Open a browser and enter:
+
+   ```
+   http://192.168.4.1
+   ```
+
+You should see the message from the ESP32 displayed in the browser.
+
+✅ This confirms that the ESP32 is successfully serving content over HTTP.
+
+---
+
+### 🖥️ Part 3: Group B uses their ESP32 as an HTTP client
+
+Now Group B uploads the following sketch to their board. It connects to Group A’s AP and sends an HTTP GET request to fetch the message.
+
+```cpp
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+const char* ssid = "GroupA-NET";
+const char* password = "12345678";
+
+void setup() {
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(300);
+    Serial.print(".");
+  }
+
+  Serial.println("\n✅ Connected to GroupA-NET!");
+  Serial.print("My IP: ");
+  Serial.println(WiFi.localIP());
+
+  HTTPClient http;
+  http.begin("http://192.168.4.1/"); // Group A’s server
+  int code = http.GET();
+
+  if (code > 0) {
+    String payload = http.getString();
+    Serial.println("📥 Received message:");
+    Serial.println(payload);
+  } else {
+    Serial.printf("❌ Request failed: %s\n", http.errorToString(code).c_str());
+  }
+
+  http.end();
+}
+
+void loop() {
+  // One-time request on setup
+}
+```
+
+---
 ## ✅ Summary
 
 In this lab, you:
@@ -202,6 +303,7 @@ In this lab, you:
 * Installed Arduino IDE and ESP32 support
 * Flashed a **Blink** sketch
 * Scanned for Wi-Fi
+* Built an HTTP client-server application over WiFi
 
 You're now ready for BLE and more advanced networking features!
 
