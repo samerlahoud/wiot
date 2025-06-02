@@ -35,6 +35,8 @@ In this session, you'll:
 
 2. Search for `esp32`, and install **“esp32 by Espressif Systems”**
 
+3. If you do not find **“esp32 by Espressif Systems”** in the list of boards, follow the [installation tutorial](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
+
 ---
 
 ## 🔌 Step 3: Connect Your Board
