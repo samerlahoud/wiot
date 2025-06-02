@@ -157,12 +157,11 @@ Scan nearby networks and display their signal strength:
 #include <WiFi.h>
 
 void setup() {
-  
+  Serial.begin(115200);
 }
 
 void loop() {
-  Serial.begin(115200);
-  delay(30000);
+  delay(10000);
   Serial.println("🔍 Scanning for networks...");
 
   int n = WiFi.scanNetworks();
@@ -177,6 +176,7 @@ void loop() {
       rssi,
       bars.c_str());
   }
+  delay(10000);
 }
 ```
 
