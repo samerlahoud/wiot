@@ -263,6 +263,7 @@ const char* password = "12345678";
 
 void setup() {
   Serial.begin(115200);
+  delay(3000)
   WiFi.begin(ssid, password);
   Serial.print("Connecting");
 
