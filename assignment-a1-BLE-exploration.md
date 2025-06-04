@@ -256,9 +256,9 @@ Modify the code from Step 2 to make the manufacturer data change every 10 second
 - [BLE Tutorial Videos](https://www.youtube.com/@Ellisys) - Official BLE specs
 
 #### Code Examples to Study:
-- [Basic BLE Server Example](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE/examples/BLE_server)
-- [BLE Notify Example](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE/examples/BLE_notify)
-- [BLE Write Example](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE/examples/BLE_write)
+- [Basic BLE Server Example](https://github.com/espressif/arduino-esp32/blob/master/libraries/BLE/examples/Server/Server.ino)
+- [BLE Notify Example](https://github.com/espressif/arduino-esp32/blob/master/libraries/BLE/examples/Notify/Notify.ino)
+- [BLE Write Example](https://github.com/espressif/arduino-esp32/blob/master/libraries/BLE/examples/Write/Write.ino)
 
 #### UUID Generation:
 - [Online UUID Generator](https://www.uuidgenerator.net/) - Generate your custom UUIDs
