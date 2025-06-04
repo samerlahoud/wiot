@@ -2,9 +2,7 @@
 
 **Course:** CSCI-4270 / CSCI-6712 – Wireless Technologies for the Internet of Things  
 **Deadline:** June 20, 2025  
-**Team:** Groups of 2 students (graduate students with graduate students)  
-**Device:** ESP32-C6  
-**Tools:** Arduino IDE, Smartphone with BLE Scanner App (e.g., nRF Connect)
+**Team:** Groups of 2 students (graduate students with graduate students)
 
 ## Track-Specific Requirements
 - **Undergraduate Students:** Complete Parts 1, 2, and optionally Part 4
@@ -74,13 +72,32 @@ void loop() {
 
 ### 📋 Step-by-Step Instructions
 
-#### Step 1: Include Required Libraries
-```cpp
-#include "BLEDevice.h"
-#include "BLEUtils.h"
-#include "BLEServer.h"
-#include "BLEAdvertising.h"
-```
+#### 🔌 Step 1: Connect Your ESP32-C6 Board
+
+1. **Plug in your ESP32-C6** using a USB-C cable.
+   Make sure you are connected to the correct UART port on your board.
+
+2. **In the Arduino IDE:**
+
+   * Go to **Tools > Board** and select:
+
+     ```
+     ESP32C6 Dev Module
+     ```
+
+   * Go to **Tools > Port** and select the correct serial port:
+
+     * On **Windows**: it will appear as `COMx`
+     * On **macOS/Linux**: look for something like `/dev/cu.usbmodem*` or `/dev/ttyUSBx`
+
+3. **If no port appears on Windows:**
+   You may need to install the USB-to-UART driver.
+
+   * Download and install the **CP210x VCP driver** from Silicon Labs:
+     👉 [https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers](https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads)
+
+   * After installation, restart the Arduino IDE and check **Tools > Port** again.
+
 
 #### Step 2: Complete Code Template
 ```cpp
