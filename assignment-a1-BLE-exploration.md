@@ -303,74 +303,72 @@ Modify the code from Step 2 to make the manufacturer data change every 10 second
 
 ---
 
-## 🎓 Part 3 – BLE Performance Analysis _(Graduate Students Only)_
+# 🎓 Part 3 – BLE Performance Analysis
+***(Graduate Students Only)***
 
-### Environment Selection
+## Environment Selection
 
-**Choose ONE of the following environments for your testing:**
+Choose **ONE** of the following environments for your testing:
 
 - **Option A:** Indoor Laboratory/Classroom (Large open room with minimal obstacles)
-- **Option B:** Outdoor Open Area (Park, courtyard, or large parking area)
+- **Option B:** Outdoor Open Area (Park, courtyard, or large parking area)  
 - **Option C:** Indoor Obstructed Environment (Hallway with people, cafeteria, or furnished room)
 
-### 🎯 Learning Objectives
+## 🎯 Learning Objectives
+
 - Conduct rigorous RF performance analysis
 - Apply statistical methods to wireless measurements
-- Understand environmental impact on BLE propagation
+- understand environmental impact on BLE propagation
 - Create publication-quality data visualizations
 
-### 📊 Comprehensive Testing Protocol
+## 📊 Comprehensive Testing Protocol
 
-**Experimental Design Requirements:**
+### Experimental Design Requirements
+
 - **Minimum 30 measurements** per test condition for statistical validity
-- **Document all environmental variables**: Temperature, humidity, time of day, interference sources
-- **Controlled methodology**: Same device orientation, same measurement procedure
+- **Document all environmental variables:** Temperature, humidity, time of day, interference sources
+- **Controlled methodology:** Same device orientation, same measurement procedure
 
-**Step 1: Comprehensive RSSI Analysis**
+### Step 1: Comprehensive RSSI Analysis
 
-**For your chosen environment:**
-- **Distances**: 1m, 2m, 3m, 5m, 7m, 10m, 15m (extend if possible)
-- **Samples**: 30 measurements per distance
-- **Timing**: Spread measurements over different times to account for interference variation
-- **Documentation**: Detailed environmental conditions for each measurement session
+For your chosen environment, collect data at the following distances:
+- **Test distances:** 1m, 2m, 3m, 5m, 7m, 10m, 15m (extend if possible)
+- **Sample size:** 30 RSSI measurements per distance
 
-**Step 2: Advertising Parameter Impact Study**
+### Step 2: Advertising Parameter Impact Study
 
-Test different advertising configurations at **multiple distances** (1m, 3m, 5m):
+Test different transmit powers at **multiple distances** (1m, 3m, 5m):
+
 ```cpp
-// Configuration A: Fast advertising, low power
-pAdvertising->setInterval(160);   // 100ms
 BLEDevice::setPower(ESP_PWR_LVL_N12); // -12dBm
-
-// Configuration B: Standard advertising, medium power  
-pAdvertising->setInterval(800);   // 500ms
-BLEDevice::setPower(ESP_PWR_LVL_N0);  // 0dBm
-
-// Configuration C: Slow advertising, high power
-pAdvertising->setInterval(1600);  // 1000ms  
+BLEDevice::setPower(ESP_PWR_LVL_N0);  // 0dBm  
 BLEDevice::setPower(ESP_PWR_LVL_P9);  // +9dBm
 ```
 
-**For each configuration:**
-- 30 RSSI measurements per distance
+**For each power configuration:**
+- Collect 30 RSSI measurements per distance
 - Calculate RSSI stability (standard deviation)
 - Analyze signal consistency
 
-#### 📊 Statistical Analysis Requirements
+## 📊 Statistical Analysis Requirements
 
-**Required Statistical Measures:**
+### Required Statistical Measures
+
 - **Mean and Standard Deviation** for all RSSI measurements
 - **95% Confidence Intervals** for distance vs RSSI relationships
 - **Correlation Coefficients** between distance and RSSI
 - **Path Loss Exponent** calculation using linear regression
 - **ANOVA** to test significance between advertising configurations
 
-**Path Loss Model Fitting:**
+### Path Loss Model Fitting
+
 Fit your data to the log-distance path loss model:
+
 ```
 RSSI(d) = RSSI₀ - 10n·log₁₀(d/d₀) + Xσ
 ```
-Where:
+
+**Where:**
 - `RSSI₀` = reference RSSI at distance d₀ (typically 1m)
 - `n` = path loss exponent
 - `Xσ` = zero-mean Gaussian random variable (dB)
@@ -380,21 +378,25 @@ Where:
 - Indoor environments: n = 2-4
 - Obstructed environments: n = 3-5
 
-#### 📈 Data Visualization Requirements
+## 📈 Data Visualization Requirements
 
-**Required Plots** (using Python, MATLAB, R, or advanced Excel):
+Create the following plots using Python, MATLAB, R, or advanced Excel:
+
 1. **RSSI vs Distance** scatter plot with fitted path loss model and confidence intervals
 2. **Box plots** showing RSSI distribution at each distance
 3. **Error bar plots** with 95% confidence intervals
 4. **Residual plot** for path loss model validation
 5. **Configuration comparison** showing RSSI vs advertising parameters
 
-#### 📋 Deliverables
+## 📋 Deliverables
+
+Submit the following components:
+
 - [ ] **Raw data files** (CSV format with metadata)
 - [ ] **Analysis scripts/code** used for statistics and plotting
 - [ ] **All required statistical plots** and model fitting results
 - [ ] **Path loss model comparison** with theoretical values
-- [ ] **Technical report (4-6 pages)** including:
+- [ ] **Technical report (1-2 pages)** including:
   - Experimental methodology
   - Statistical analysis results
   - Path loss model evaluation
