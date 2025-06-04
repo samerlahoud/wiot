@@ -460,7 +460,6 @@ For each found beacon, record:
 ```
 A1_GroupXX_Undergraduate/
 ├── Part1_Broadcaster/
-│   ├── Part1_Static.ino
 │   ├── Part1_Dynamic.ino
 │   ├── Part1_Screenshot.jpg (or .png)
 │   └── Part1_Explanation.txt
