@@ -251,9 +251,9 @@ Modify the code from Step 2 to make the manufacturer data change every 10 second
 ### 📚 Essential References
 
 #### Official Documentation:
-- [ESP32 BLE Arduino Library](https://github.com/nkolban/ESP32_BLE_Arduino) - Main library docs
+- [ESP32 BLE Arduino Library](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE) - Main library docs
 - [ESP32 BLE Server Tutorial](https://randomnerdtutorials.com/esp32-ble-server/) - Basic server setup
-- [BLE Characteristic Properties](https://www.bluetooth.com/specifications/assigned-numbers/generic-attribute-profile/) - Official BLE specs
+- [BLE Tutorial Videos](https://www.youtube.com/@Ellisys) - Official BLE specs
 
 #### Code Examples to Study:
 - [Basic BLE Server Example](https://github.com/espressif/arduino-esp32/tree/master/libraries/BLE/examples/BLE_server)
