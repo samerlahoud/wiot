@@ -199,9 +199,7 @@ Modify the code from Step 2 to make the manufacturer data change every 10 second
 
 ### ✅ Part 1 Deliverables
 - [ ] Screenshot from smartphone showing your device
-- [ ] **Two Arduino code files:**
-  - Static version (Steps 2-4): `Part1_Static.ino`
-  - Dynamic version (Step 5): `Part1_Dynamic.ino`
+- [ ] Arduino code file for Dynamic version (Step 5): `Part1_Dynamic.ino`
 - [ ] Text explanation (2-3 sentences each):
   - What the device name represents
   - Purpose of the UUID
