@@ -318,7 +318,7 @@ Choose **ONE** of the following environments for your testing:
 
 - Conduct rigorous RF performance analysis
 - Apply statistical methods to wireless measurements
-- understand environmental impact on BLE propagation
+- Understand environmental impact on BLE propagation
 - Create publication-quality data visualizations
 
 ## 📊 Comprehensive Testing Protocol
@@ -337,7 +337,7 @@ For your chosen environment, collect data at the following distances:
 
 ### Step 2: Advertising Parameter Impact Study
 
-Test different transmit powers at **multiple distances** (1m, 3m, 5m):
+Test different transmit powers at **multiple distances**:
 
 ```cpp
 BLEDevice::setPower(ESP_PWR_LVL_N12); // -12dBm
@@ -358,7 +358,6 @@ BLEDevice::setPower(ESP_PWR_LVL_P9);  // +9dBm
 - **95% Confidence Intervals** for distance vs RSSI relationships
 - **Correlation Coefficients** between distance and RSSI
 - **Path Loss Exponent** calculation using linear regression
-- **ANOVA** to test significance between advertising configurations
 
 ### Path Loss Model Fitting
 
@@ -536,36 +535,14 @@ Special Instructions:
 
 ## 📚 Extended Resources
 
-### Essential Reading
-- [ESP32 BLE Arduino Library Documentation](https://github.com/nkolban/ESP32_BLE_Arduino)
-- [Bluetooth Low Energy Fundamentals](https://learn.adafruit.com/introduction-to-bluetooth-low-energy/introduction)
-
 ### Recommended BLE Scanner Apps
 - **nRF Connect** (Nordic Semiconductor) - Most detailed
 - **BLE Scanner** (Bluepixel Technologies) - Simple interface  
 - **LightBlue Explorer** (Punch Through) - iOS users
 
-### Advanced Topics (Optional)
-- BLE Security and Pairing
-- Custom BLE Protocols
-- Power Management
-- Multiple Characteristic Services
-
-### Common BLE UUIDs for Reference
-- Heart Rate Service: `0x180D`
-- Battery Service: `0x180F`
-- Device Information: `0x180A`
-- Environmental Sensing: `0x181A`
-
 ---
 
 ## 🆘 Getting Help
-
-### Before Asking for Help
-1. Check Serial Monitor output for error messages
-2. Verify your code compiles without errors
-3. Try restarting both ESP32 and phone
-4. Check that your phone's Bluetooth is enabled
 
 ### Where to Get Help
 - **Teams Discussion Forum:** Post general questions
@@ -575,7 +552,6 @@ Special Instructions:
 ### Common Issues and Solutions
 
 **"Library not found" errors:**
-- Reinstall ESP32 board package
 - Check library includes are correct
 
 **"Device not found" on phone:**
