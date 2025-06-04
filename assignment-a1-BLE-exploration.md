@@ -1,7 +1,7 @@
-# Assignment A1 – BLE Exploration with ESP32-C6 (Enhanced Student Guide)
+# Assignment A1 – BLE Exploration
 
 **Course:** CSCI-4270 / CSCI-6712 – Wireless Technologies for the Internet of Things  
-**Deadline:** _[Insert Deadline]_  
+**Deadline:** June 19, 2025  
 **Team:** Groups of 2 students (graduate students with graduate students)  
 **Device:** ESP32-C6  
 **Tools:** Arduino IDE, Smartphone with BLE Scanner App (e.g., nRF Connect)
