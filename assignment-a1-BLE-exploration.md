@@ -1,10 +1,14 @@
-# Assignment A1 – BLE Exploration
+# Assignment A1 – BLE Exploration with ESP32-C6 (Enhanced Student Guide)
 
 **Course:** CSCI-4270 / CSCI-6712 – Wireless Technologies for the Internet of Things  
-**Deadline:** June 19, 2025  
+**Deadline:** _[Insert Deadline]_  
 **Team:** Groups of 2 students (graduate students with graduate students)  
 **Device:** ESP32-C6  
 **Tools:** Arduino IDE, Smartphone with BLE Scanner App (e.g., nRF Connect)
+
+## Track-Specific Requirements
+- **Undergraduate Students:** Complete Parts 1, 2, and optionally Part 4
+- **Graduate Students:** Complete Parts 1, 3, and optionally Part 4
 
 ---
 
@@ -151,52 +155,12 @@ When you find your device, look for:
 #### Step 5: Implement Dynamic Manufacturer Data
 Modify the code from Step 2 to make the manufacturer data change every 10 seconds:
 
-**Specific Modifications Required:**
-1. **Move global variables outside setup():**
-   - Declare `BLEAdvertising* pAdvertising` as a global variable
-   - Add timing variables: `unsigned long lastUpdate = 0;` and `const unsigned long updateInterval = 10000;`
-
-2. **Create an update function** (add before setup):
-```cpp
-void updateManufacturerData() {
-  // Generate new random data
-  uint8_t newData[2];
-  newData[0] = random(0, 256);
-  newData[1] = random(0, 256);
-  
-  // Stop advertising
-  pAdvertising->stop();
-  
-  // Update manufacturer data
-  String mfgData = "";
-  mfgData += (char)newData[0];
-  mfgData += (char)newData[1];
-  
-  BLEAdvertisementData adData = BLEAdvertisementData();
-  adData.setManufacturerData(mfgData);
-  pAdvertising->setAdvertisementData(adData);
-  
-  // Restart advertising
-  pAdvertising->start();
-  
-  // Print update to Serial Monitor
-  Serial.printf("Updated Manufacturer Data: 0x%02X%02X\n", newData[0], newData[1]);
-}
-```
-
-3. **Modify the loop() function:**
-```cpp
-void loop() {
-  unsigned long currentTime = millis();
-  
-  if (currentTime - lastUpdate >= updateInterval) {
-    updateManufacturerData();
-    lastUpdate = currentTime;
-  }
-  
-  delay(100); // Small delay to prevent excessive CPU usage
-}
-```
+**Implementation Hints:**
+1. **Move the advertising pointer to global scope** so you can access it from both setup() and loop()
+2. **Use `millis()` for timing** instead of `delay()` to check if 10 seconds have passed
+3. **Create a separate function** to handle updating the manufacturer data
+4. **Remember the update sequence**: Stop advertising → Update data → Restart advertising
+5. **Print updates to Serial Monitor** so you can verify the timing works correctly
 
 **Testing Process:**
 1. Upload your modified code to ESP32-C6
@@ -229,7 +193,7 @@ void loop() {
 
 ---
 
-## 🟩 Part 2 – BLE Peripheral with Custom GATT Service
+## 🟩 Part 2 – BLE Peripheral with Custom GATT Service _(Undergraduate Students Only)_
 
 ### 🎯 Learning Objectives
 - Design and implement a custom GATT service profile
@@ -339,7 +303,7 @@ void loop() {
 
 ---
 
-## 🎓 Part 3 – BLE Performance Analysis
+## 🎓 Part 3 – BLE Performance Analysis _(Graduate Students Only)_
 
 ### Environment Selection
 
@@ -349,63 +313,13 @@ void loop() {
 - **Option B:** Outdoor Open Area (Park, courtyard, or large parking area)
 - **Option C:** Indoor Obstructed Environment (Hallway with people, cafeteria, or furnished room)
 
----
-
-### For Undergraduate Students
-
-#### 🎯 Learning Objectives
-- Understand BLE signal propagation basics
-- Practice systematic testing methodology
-- Analyze environmental effects on RSSI
-- Create simple data visualizations
-
-#### 📋 Testing Protocol
-
-**Step 1: RSSI vs Distance Testing**
-- Use your Part 1 or Part 2 code for testing
-- **Test distances**: 1m, 2m, 3m, 5m, 7m, 10m
-- **Measurements per distance**: 10 readings minimum
-- **Document your chosen environment** thoroughly
-
-**Step 2: Power Level Testing** (Optional Enhancement)
-If comfortable with code modification, test different power levels:
-```cpp
-BLEDevice::setPower(ESP_PWR_LVL_N12); // -12dBm (low)
-BLEDevice::setPower(ESP_PWR_LVL_N0);  // 0dBm (medium)  
-BLEDevice::setPower(ESP_PWR_LVL_P9);  // +9dBm (high)
-```
-
-#### 📊 Data Analysis Requirements
-
-**Create the following visualizations:**
-1. **RSSI vs Distance graph** - line chart showing signal degradation
-2. **Power level comparison** - bar chart (if Step 2 completed)
-
-**Calculate basic statistics:**
-- Average RSSI for each distance
-- RSSI range (max - min) for each distance  
-- Standard deviation of RSSI measurements
-
-#### 📋 Deliverables
-- [ ] Data collection tables (Excel/Google Sheets)
-- [ ] 2-3 simple graphs/charts
-- [ ] **2-page summary report** including:
-  - Environment description and selection rationale
-  - Testing methodology
-  - Key findings and RSSI patterns observed
-  - Practical implications for IoT applications
-
----
-
-### For Graduate Students
-
-#### 🎯 Learning Objectives
+### 🎯 Learning Objectives
 - Conduct rigorous RF performance analysis
 - Apply statistical methods to wireless measurements
 - Understand environmental impact on BLE propagation
 - Create publication-quality data visualizations
 
-#### 📊 Comprehensive Testing Protocol
+### 📊 Comprehensive Testing Protocol
 
 **Experimental Design Requirements:**
 - **Minimum 30 measurements** per test condition for statistical validity
@@ -525,8 +439,10 @@ For each found beacon, record:
 ## 📦 Final Submission Requirements
 
 ### File Structure
+
+#### Undergraduate Students:
 ```
-A1_GroupXX/
+A1_GroupXX_Undergraduate/
 ├── Part1_Broadcaster/
 │   ├── Part1_Static.ino
 │   ├── Part1_Dynamic.ino
@@ -536,10 +452,22 @@ A1_GroupXX/
 │   ├── Part2_Implementation.ino
 │   ├── Part2_Screenshots.jpg (or .png)
 │   └── Part2_Design_Document.pdf
+├── Part4_Egghunt.pdf         # (Optional bonus)
+└── README.txt
+```
+
+#### Graduate Students:
+```
+A1_GroupXX_Graduate/
+├── Part1_Broadcaster/
+│   ├── Part1_Static.ino
+│   ├── Part1_Dynamic.ino
+│   ├── Part1_Screenshot.jpg (or .png)
+│   └── Part1_Explanation.txt
 ├── Part3_Performance/
-│   ├── Performance_Report.pdf
+│   ├── Technical_Report.pdf
 │   ├── Raw_Data.csv
-│   ├── Analysis_Scripts/      # (Graduate students only)
+│   ├── Analysis_Scripts/
 │   └── Plots/
 ├── Part4_Egghunt.pdf         # (Optional bonus)
 └── README.txt
@@ -557,13 +485,13 @@ Team Members:
 
 Work Distribution:
 - Part 1 (BLE Broadcaster): [Who did what]
-- Part 2 (Custom GATT Service): [Who did what]  
-- Part 3 (Performance Analysis): [Who did what]
+- Part 2 (Custom GATT Service): [Undergraduate only - who did what]  
+- Part 3 (Performance Analysis): [Graduate only - who did what]
 - Part 4 (Egg Hunt): [If attempted - who did what]
 
 Project Summary:
-Part 2 Service Description: [Brief description of your custom service]
-Part 3 Environment: [Testing environment chosen and why]
+Part 2 Service Description: [Undergraduate: Brief description of your custom service]
+Part 3 Environment: [Graduate: Testing environment chosen and why]
 
 Additional Notes:
 - [Challenges faced and how you solved them]
@@ -587,9 +515,8 @@ Special Instructions:
 #### Undergraduate Track
 | Component | Points | Description |
 |-----------|--------|-------------|
-| Part 1 - Implementation & Documentation | 25 | Working broadcaster with clear documentation |
-| Part 2 - Custom Service Design | 35 | Well-designed GATT service with multiple characteristics |
-| Part 3 - Performance Analysis | 30 | Systematic RSSI testing with basic statistical analysis |
+| Part 1 - Implementation & Documentation | 40 | Working broadcaster with clear documentation (static + dynamic) |
+| Part 2 - Custom Service Design | 50 | Well-designed GATT service with multiple characteristics |
 | Code Quality & Professional Presentation | 10 | Clean code, proper documentation, professional submission |
 | **Total** | **100** | |
 | Part 4 - Bonus Egg Hunt | +5 | Additional points for beacon discovery |
@@ -597,9 +524,8 @@ Special Instructions:
 #### Graduate Track  
 | Component | Points | Description |
 |-----------|--------|-------------|
-| Part 1 - Implementation & Documentation | 20 | Working broadcaster with clear documentation |
-| Part 2 - Custom Service Design | 25 | Well-designed GATT service with multiple characteristics |
-| Part 3 - Performance Analysis | 45 | Rigorous statistical analysis with publication-quality report |
+| Part 1 - Implementation & Documentation | 30 | Working broadcaster with clear documentation (static + dynamic) |
+| Part 3 - Performance Analysis | 60 | Rigorous statistical analysis with publication-quality report |
 | Code Quality & Professional Presentation | 10 | Clean code, proper documentation, professional submission |
 | **Total** | **100** | |
 | Part 4 - Bonus Egg Hunt | +5 | Additional points for beacon discovery |
