@@ -420,10 +420,6 @@ Submit the following components:
 
 ---
 
-Here is the revised version of **Part 4 – BLE Egg Hunt**, incorporating your instructions and adding a playful but professional riddle element for the final reading step:
-
----
-
 ## 🥚 Part 4 – BLE Egg Hunt (Bonus for Everyone)
 
 ### 🎯 Learning Objectives
