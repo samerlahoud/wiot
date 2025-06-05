@@ -418,37 +418,63 @@ Submit the following components:
 
 ---
 
-## 🥚 Part 4 – BLE Egg Hunt _(Bonus for Everyone)_
+Here is the revised version of **Part 4 – BLE Egg Hunt**, incorporating your instructions and adding a playful but professional riddle element for the final reading step:
+
+---
+
+## 🥚 Part 4 – BLE Egg Hunt (Bonus for Everyone)
 
 ### 🎯 Learning Objectives
-- Practice real-world BLE scanning
-- Analyze unknown BLE devices
-- Apply signal strength for location finding
 
-### 📋 Hunt Strategy
+* Practice real-world BLE scanning in a semi-controlled environment
+* Apply signal strength (RSSI) to locate unknown BLE devices
+* Analyze GATT services and decode meaningful information
+* Engage with BLE in a fun, discovery-driven context
 
-#### Step 1: Systematic Scanning
-- Use your BLE scanner app in "scan" mode
-- Look for devices with names starting with "Egg-"
-- Check manufacturer data and service UUIDs for clues
+---
 
-#### Step 2: Signal Strength Triangulation
-- Use RSSI values to estimate distance
-- Walk around to find strongest signal location
-- Document approximate location
+### 📍 Hunt Setting
 
-#### Step 3: Data Analysis
-For each found beacon, record:
-- Device name
-- RSSI at closest approach
-- Approximate location
-- Any special data in advertisements
-- Time of discovery
+Hidden somewhere in the **open area on the second floor of the Goldberg Computer Science Building**, a BLE beacon device—called the **BLE Egg**—is broadcasting under a name that starts with:
+
+```
+egg_
+```
+
+Your mission is to **track down this BLE egg**, identify its services, and read a specific measurement.
+
+---
+
+### 🧭 Hunt Strategy
+
+#### 🔍 Step 1: Systematic Scanning
+
+* Program your ESP32 to scan for BLE devices.
+* Begin scanning in the open area on the **second floor** (you do not need to enter any restricted area).
+* Look for devices whose names begin with `"egg_"`.
+* Take note of service UUIDs or manufacturer data—it may contain clues.
+
+#### 📶 Step 2: Signal Strength Tracking
+
+* Use RSSI to estimate proximity to the beacon.
+
+#### 📜 Step 3: Riddle Decoding (Data Analysis)
+
+Once connected, explore the advertised services and characteristics.
+
+> One of the characteristics hides a message:
+> **“Though I do not burn, I rise when warm. What is my name?”**
+> Read the value of the characteristic—it holds the **answer in degrees**.
+
+---
 
 ### ✅ Part 4 Deliverables
-- [ ] Screenshots of each discovered beacon
-- [ ] Location map or description
-- [ ] Analysis of any patterns in the data
+
+* 📸 **Screenshots** of the discovered Egg device on your serial monitor
+* 📍 **Location description or sketch** of where you found it
+* 📊 **RSSI values** and how you used them to locate the beacon
+* 🔍 **Analysis of advertisement and service data**
+* ❓ **Answer to the riddle**
 
 ---
 
