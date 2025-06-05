@@ -1,7 +1,7 @@
 # Assignment A1 – BLE Exploration
 
 **Course:** CSCI-4270 / CSCI-6712 – Wireless Technologies for the Internet of Things  
-**Deadline:** June 20, 2025  
+**Deadline:** 7:00 pm on June 20, 2025 (Late submission policy is available in the syllabus)  
 **Submission:** Upload the required material as **one zip file** on Brightspace  
 **Team:** Groups of 2 students (graduate students with graduate students)
 
