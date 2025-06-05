@@ -2,7 +2,7 @@
 
 **Course:** CSCI-4270 / CSCI-6712 – Wireless Technologies for the Internet of Things  
 **Deadline:** June 20, 2025  
-**Submission:** Upload the required material as **one zip file** on Brightspace
+**Submission:** Upload the required material as **one zip file** on Brightspace  
 **Team:** Groups of 2 students (graduate students with graduate students)
 
 ## Track-Specific Requirements
