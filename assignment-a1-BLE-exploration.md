@@ -2,6 +2,7 @@
 
 **Course:** CSCI-4270 / CSCI-6712 – Wireless Technologies for the Internet of Things  
 **Deadline:** June 20, 2025  
+**Submission:** Upload the required material as **one zip file** on Brightspace.
 **Team:** Groups of 2 students (graduate students with graduate students)
 
 ## Track-Specific Requirements
@@ -345,6 +346,7 @@ Choose **ONE** of the following environments for your testing:
 - **Controlled methodology:** Same device orientation, same measurement procedure
 
 ### Step 1: Comprehensive RSSI Analysis
+In the following, you will make use of the received signal strength indicator (RSSI). RSSI is a measurement of the power present in a received radio signal typically expressed in dBm.
 
 For your chosen environment, collect data at the following distances:
 - **Test distances:** 1m, 2m, 3m, 5m, 7m, 10m, 15m (extend if possible)
@@ -427,7 +429,7 @@ Here is the revised version of **Part 4 – BLE Egg Hunt**, incorporating your i
 ### 🎯 Learning Objectives
 
 * Practice real-world BLE scanning in a semi-controlled environment
-* Apply signal strength (RSSI) to locate unknown BLE devices
+* Apply signal strength (RSSI or received signal strength indicator expressed in dBm) to locate unknown BLE devices
 * Analyze GATT services and decode meaningful information
 * Engage with BLE in a fun, discovery-driven context
 
@@ -479,6 +481,8 @@ Once connected, explore the advertised services and characteristics.
 ---
 
 ## 📦 Final Submission Requirements
+
+Submit the required material as **one zip file** on Brightspace.
 
 ### File Structure
 
