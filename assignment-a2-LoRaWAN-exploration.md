@@ -159,7 +159,7 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 #### Step 4: Verify via MQTT
 **Download MQTT Explorer:** First, download and install MQTT Explorer from https://mqtt-explorer.com
 
-**Connection Setup:** Use the configuration shown in `mqtt-config.jpeg` with these details:
+**Connection Setup:** Use the configuration as shown in [the screenshot](a2-material/mqtt-config.jpg) with these details:
 - **Broker:** `nam1.cloud.thethings.network:8883`
 - **Username:** `<app-id>@ttn`
 - **Password:** Non-interactive API key from TTN Console
