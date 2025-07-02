@@ -177,4 +177,4 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 - [ ] `part1_uplink.ino` (identify these key elements with comments):
   - Sending function and transmission period
   - Join process handling
-  - Event callback functions
+  - Event callback functions including packet reception
