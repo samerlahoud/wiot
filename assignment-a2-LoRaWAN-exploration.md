@@ -148,7 +148,7 @@ Verify these definitions are **uncommented** in the MCCI LoRaWAN LMIC library co
 If they are commented (have `//` in front), remove the `//` to enable them.
 
 #### Step 3: Program and Test
-1. Insert your converted identifiers into the provided `.ino` template
+1. Insert your converted identifiers into the provided [template](a2-material/rnd-test/rnd-test.ino)
 2. Connect TTGO ESP32 to your computer
 3. Select correct board and port in Arduino IDE
 4. Compile and upload the sketch
