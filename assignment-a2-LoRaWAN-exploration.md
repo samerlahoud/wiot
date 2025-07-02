@@ -161,8 +161,8 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 
 **Connection Setup:** Use the configuration as shown in [the screenshot](a2-material/mqtt-config.jpg) with these details:
 - **Broker:** `nam1.cloud.thethings.network:8883`
-- **Username:** `<app-id>@ttn`
-- **Password:** Non-interactive API key from TTN Console
+- **Username:** `test-dal@ttn`
+- **Password:** Non-interactive API key provided for you separately
 
 **Finding Your Device Data:** 
 - Once connected, use the search button in MQTT Explorer
