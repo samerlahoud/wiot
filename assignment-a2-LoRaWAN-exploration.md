@@ -211,6 +211,7 @@ If they are commented (have `//` in front), remove the `//` to enable them.
      * RSSI (dBm)
 
 3. **Implement downlink control via MQTT**
+
 You can refer to the TTN [documentation](https://www.thethingsindustries.com/docs/integrations/other-integrations/mqtt/) on how to connect an MQTT client and subscribe to uplinks or publish downlinks.
 
    * Extend the Python script to send a downlink command:
