@@ -9,7 +9,7 @@
 
 ## 🌐 Platform Overview
 
-This assignment uses a complete LoRaWAN infrastructure setup that demonstrates real-world LPWAN connectivity:
+This assignment uses a complete LoRaWAN infrastructure setup that demonstrates real-world LPWAN connectivity.
 
 ### System Architecture
 
@@ -48,6 +48,7 @@ This assignment uses a complete LoRaWAN infrastructure setup that demonstrates r
 | **Monitoring PC** | Data visualization/control | MQTT Explorer client |
 
 ### Data Flow
+
 1. **TTGO device** sends sensor data via LoRa radio (915 MHz)
 2. **Gateway** receives LoRa packets and forwards via internet to TTN
 3. **TTN Network Server** handles LoRaWAN protocol, security, and routing
@@ -55,6 +56,7 @@ This assignment uses a complete LoRaWAN infrastructure setup that demonstrates r
 5. **Monitoring PC** with MQTT client subscribes to device data for real-time analysis
 
 ### What is MQTT?
+
 **MQTT (Message Queuing Telemetry Transport)** is a lightweight messaging protocol designed for IoT applications. It uses a **publish-subscribe** model:
 
 - **Publisher:** TTN publishes your device data to specific topics (like `/devices/your-device/up`)
@@ -95,6 +97,7 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 > **Note:** Skip this section if you completed the in-class tutorial on July 3.
 
 #### Arduino IDE Configuration
+
 1. Open Arduino IDE
 2. Navigate to **Tools → Board → Boards Manager**
 3. Search for "esp32" and install **"esp32 by Espressif"** (if not from Assignment 1)
@@ -103,6 +106,7 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 5. Set upload speed: **Tools → Upload Speed → 115200**
 
 #### LMIC Library Installation
+
 1. Go to **Sketch → Include Library → Manage Libraries**
 2. Search for "LMIC" and install **"MCCI LoRaWAN LMIC Library"**
 
@@ -111,6 +115,7 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 ## 🔵 Part 1 – LoRaWAN Uplink Test
 
 ### 🎯 Objectives
+
 - Configure TTGO ESP32 as LoRaWAN OTAA device
 - Set up uplinks on US915 frequency plan
 - Verify successful join and data transmission via MQTT
@@ -134,20 +139,25 @@ dev_eui;app_eui;app_key
 | **AppKey** | Big-endian (as-is) | `0x67, 0x09, 0x88, 0x64, 0x1E, 0x69, 0xDF, 0xFF, 0x09, 0xD2, 0x30, 0x98, 0xB9, 0xE0, 0x49, 0xDA` |
 
 #### Step 2: Configure LMIC Library
+
 Verify these definitions are **uncommented** in the MCCI LoRaWAN LMIC library configuration:
+
 - Navigate to your Arduino libraries folder:
   - **Windows:** `C:\Users\{username}\Documents\Arduino\libraries\`
   - **macOS:** `/Users/{username}/Documents/Arduino/libraries/`
   - **Linux:** `/home/{username}/Arduino/libraries/`
 - Open `MCCI_LoRaWAN_LMIC_library/project_config/lmic_project_config.h`
 - Ensure these lines are **not commented out**:
+
 ```cpp
 #define CFG_us915 1
 #define CFG_sx1276_radio 1
 ```
+
 If they are commented (have `//` in front), remove the `//` to enable them.
 
 #### Step 3: Program and Test
+
 1. Insert your converted identifiers into the provided [template](a2-material/rnd-test/rnd-test.ino)
 2. Connect TTGO ESP32 to your computer
 3. Select correct board and port in Arduino IDE
@@ -157,6 +167,7 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 7. Device will send uplinks periodically
 
 #### Step 4: Verify via MQTT
+
 **Download MQTT Explorer:** First, download and install MQTT Explorer from https://mqtt-explorer.com
 
 **Connection Setup:** Use the configuration as shown in [the screenshot](a2-material/mqtt-config.jpg) with these details:
@@ -173,60 +184,64 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 **Verification:** Confirm receipt of at least 5 uplink packets
 
 ### ✅ Part 1 Deliverables
+
 - [ ] Screenshot from MQTT Explorer showing ≥5 uplinks from your device
 - [ ] `part1_uplink.ino` (identify these key elements with comments):
   - Sending function and transmission period
   - Join process handling
   - Event callback functions including packet reception
 
+---
 
 ## 🟩 Part 2 – Payload + Downlink Command *(Undergraduate Students Only)*
 
 ### 🎯 Learning Objectives
 
-* Transmit application-layer data in a structured JSON format
-* Process and validate received payloads using a Python MQTT subscriber
-* Analyze key radio parameters (frequency, RSSI, SNR) through data visualization
-* Implement actuator control via MQTT-based downlink messaging
+- Transmit application-layer data in a structured JSON format
+- Process and validate received payloads using a Python MQTT subscriber
+- Analyze key radio parameters (frequency, RSSI, SNR) through data visualization
+- Implement actuator control via MQTT-based downlink messaging
 
 ### 📋 Requirements
 
-1. **Modify the provided Arduino sketch** to:
+#### 1. Modify the Arduino Sketch
 
-   * Send a JSON-encoded payload every 60 seconds containing:
+Update the provided Arduino sketch to:
 
-     ```json
-     {"t": <random_temperature>, "h": <random_humidity>}
-     ```
+- Send a JSON-encoded payload every 60 seconds containing:
 
-     where temperature ∈ \[15, 30] °C and humidity ∈ \[30, 60] %
+```json
+{"t": <random_temperature>, "h": <random_humidity>}
+```
 
-2. **Use the provided Python [template](a2-material/mqtt-template.py) script** to:
+where temperature ∈ [15, 30] °C and humidity ∈ [30, 60] %
 
-   * Connect to The Things Stack MQTT broker and subscribe to your device’s uplink topic (you may need to install the `paho-mqtt` library)
-   * Decode the JSON payload and extract temperature and humidity values. A detailed documentation on data formats is provided [here](https://www.thethingsindustries.com/docs/integrations/data-formats/) 
-   * Log and plot:
+#### 2. Implement Python MQTT Subscriber
 
-     * Uplink frequency (Hz)
-     * RSSI (dBm)
+Use the provided Python [template](a2-material/mqtt-template.py) script to:
 
-3. **Implement downlink control via MQTT**
+- Connect to The Things Stack MQTT broker and subscribe to your device's uplink topic (you may need to install the `paho-mqtt` library)
+- Decode the JSON payload and extract temperature and humidity values. Detailed documentation on data formats is provided [here](https://www.thethingsindustries.com/docs/integrations/data-formats/)
+- Log and plot:
+  - Uplink frequency (Hz)
+  - RSSI (dBm)
+
+#### 3. Implement Downlink Control via MQTT
 
 You can refer to the TTN [documentation](https://www.thethingsindustries.com/docs/integrations/other-integrations/mqtt/) on how to connect an MQTT client and subscribe to uplinks or publish downlinks.
 
-   * Extend the Python script to send a downlink command:
+Extend the Python script to send a downlink command:
+- `0x01` → Turn **ON** the onboard LED
+- `0x00` → Turn **OFF** the LED
 
-     * `0x01` → Turn **ON** the onboard LED
-     * `0x00` → Turn **OFF** the LED
-   * Implement logic in the Arduino sketch to interpret and act on these commands
+Implement logic in the Arduino sketch to interpret and act on these commands.
 
-### ✅ Deliverables
+### ✅ Part 2 Deliverables
 
-* `part2_payload.ino`: your updated and commented Arduino code including all the requirements
-* `downlink_screenshot.png`: showing LED control confirmation in Serial Monitor
-* `mqtt-test.py`: your modified Python MQTT client (with clear comments and example output)
-* Two plots visualizing signal quality data (frequency and RSSI)
-* `code-explanation.txt`: include:
-
-  * How the uplink message parsing was implemented and verified
-  * How the downlink interaction was implemented and verified
+- [ ] `part2_payload.ino`: your updated and commented Arduino code including all the requirements
+- [ ] `downlink_screenshot.png`: showing LED control confirmation in Serial Monitor
+- [ ] `mqtt-test.py`: your modified Python MQTT client (with clear comments and example output)
+- [ ] Two plots visualizing signal quality data (frequency and RSSI)
+- [ ] `code-explanation.txt`: include:
+  - How the uplink message parsing was implemented and verified
+  - How the downlink interaction was implemented and verified
