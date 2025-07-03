@@ -203,7 +203,7 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 
 2. **Use the provided Python [template](a2-material/mqtt-template.py) script** to:
 
-   * Connect to The Things Stack MQTT broker and subscribe to your device’s uplink topic
+   * Connect to The Things Stack MQTT broker and subscribe to your device’s uplink topic (you may need to install the `paho-mqtt` library)
    * Decode the JSON payload and extract temperature and humidity values. A detailed documentation on data formats is provided [here](https://www.thethingsindustries.com/docs/integrations/data-formats/) 
    * Log and plot:
 
