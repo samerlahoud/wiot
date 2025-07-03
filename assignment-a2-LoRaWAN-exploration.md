@@ -81,22 +81,10 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 
 ## 🚀 Getting Started
 
-### Prerequisites Checklist
-
-Before you begin, ensure you have:
-- [ ] TTGO ESP32 LoRa32 board (915 MHz with antenna)
-- [ ] Micro USB cable for programming
-- [ ] Arduino IDE installed (version 2.0 or later)
-- [ ] ESP32 board package installed in Arduino IDE
-- [ ] MCCI LoRaWAN LMIC Library installed
-- [ ] MQTT Explorer or similar MQTT client
-- [ ] Python 3.x with paho-mqtt library (Parts 2 & 3)
-- [ ] Basic understanding of Arduino programming
-
 ### Hardware & Software Requirements
 
 **Hardware Needed:**
-- TTGO ESP32 LoRa32 board (915 MHz with antenna)
+- TTGO ESP32 LoRa32 board or TTGO T-Beam (915 MHz with antenna)
 - Micro USB cable for programming
 
 **Software Setup:**
@@ -114,7 +102,7 @@ Before you begin, ensure you have:
 
 1. Open Arduino IDE
 2. Navigate to **Tools → Board → Boards Manager**
-3. Search for "esp32" and install **"esp32 by Espressif"** (if not from Assignment 1)
+3. Search for "esp32" and install **"esp32 by Espressif"** if not done during Assignment 1
 4. Select **Tools → Board → ESP32 Arduino → TTGO LoRa32-OLED** (or T-Beam)
    > **Note:** T-Beam is the longer form factor board with built-in GPS module
 5. Set upload speed: **Tools → Upload Speed → 115200**
@@ -251,10 +239,9 @@ where temperature ∈ [15, 30] °C and humidity ∈ [30, 60] %
 
 #### 2. Implement Python MQTT Subscriber
 
-Use the provided Python [template](a2-material/mqtt-template.py) script to:
+Install required python library: `paho-mqtt`, then use the provided Python [template](a2-material/mqtt-template.py) script to:
 
 - Connect to The Things Stack MQTT broker and subscribe to your device's uplink topic
-- Install required library: `pip install paho-mqtt`
 - Decode the JSON payload and extract temperature and humidity values
 - Log and plot:
   - Uplink frequency (Hz)
@@ -277,31 +264,6 @@ Implement logic in the Arduino sketch to:
 
 **Reference:** [TTN MQTT Integration](https://www.thethingsindustries.com/docs/integrations/other-integrations/mqtt/)
 
-### 🔧 Implementation Guide
-
-#### Arduino JSON Payload Example:
-```cpp
-// In your do_send() function
-String jsonPayload = "{\"t\":" + String(random(15, 31)) + 
-                     ",\"h\":" + String(random(30, 61)) + "}";
-                     
-// Convert to bytes for transmission
-memcpy(mydata, jsonPayload.c_str(), jsonPayload.length());
-LMIC_setTxData2(1, mydata, jsonPayload.length(), 0);
-```
-
-#### Python MQTT Subscriber Structure:
-```python
-import paho.mqtt.client as mqtt
-import json
-import csv
-from datetime import datetime
-
-# Callback for receiving messages
-def on_message(client, userdata, msg):
-    payload = json.loads(msg.payload.decode())
-    # Extract and process data here
-```
 
 ### ✅ Part 2 Deliverables
 
@@ -330,12 +292,12 @@ def on_message(client, userdata, msg):
 
 #### 1. RSSI Measurement Campaign
 
-Use the provided Python [template](a2-material/mqtt-template.py) script to:
+Install required python library: `paho-mqtt`, then use the provided Python [template](a2-material/mqtt-template.py) script to:
 
 - Connect to The Things Stack MQTT broker and subscribe to your device's uplink topic
-- Install required library: `pip install paho-mqtt`
 - Decode and automatically log **RSSI values** and **timestamps** for each received packet
-- Refer to [TTN data formats](https://www.thethingsindustries.com/docs/integrations/data-formats/)
+
+**Reference:** [TTN data formats](https://www.thethingsindustries.com/docs/integrations/data-formats/)
 
 #### 2. Associate RSSI Samples with Device Locations
 
@@ -352,30 +314,14 @@ Conduct measurements from at least **three distinct physical locations** on or n
 - **Location 2:** Partially obstructed (e.g., behind buildings, trees)
 - **Location 3:** Heavily obstructed or indoor location
 
-**Tracking methodology:** You must devise your own method to associate RSSI measurements with locations. Consider:
+**Tracking methodology:** You must devise your own method to associate RSSI measurements with locations. You can consider any solution from the following:
 - Manual logging with timestamps
 - GPS coordinates from smartphone
 - Automated location tags in your Python script
 
 #### 3. Theoretical Propagation Modeling
 
-Implement the [COST Hata urban path loss model](https://en.wikipedia.org/wiki/COST_Hata_model) to estimate expected received power.
-
-**Link budget parameters to determine:**
-- Transmit power (check TTGO ESP32 specifications)
-- Antenna gains (typically 2-3 dBi for omnidirectional)
-- Cable/connector losses
-- Frequency (915 MHz)
-- Antenna heights
-
-**COST Hata model implementation:**
-```python
-# Path loss calculation
-PL = 46.3 + 33.9*log10(f) - 13.82*log10(h_b) - a(h_m) + 
-     (44.9 - 6.55*log10(h_b))*log10(d) + C_m
-```
-
-Where you must justify values for all parameters.
+Implement the [COST Hata urban path loss model](https://en.wikipedia.org/wiki/COST_Hata_model) to estimate expected received power. You must determine *all the elements of the Link budget* and the *path loss* and provide referenced explanation.
 
 #### 4. Data Analysis and Comparison
 
@@ -384,25 +330,13 @@ Where you must justify values for all parameters.
 - Calculate mean absolute error (MAE) for each location
 - Analyze deviations and discuss possible causes
 
-### 🔧 Analysis Guidelines
-
-#### Statistical Analysis:
-- Calculate mean RSSI and standard deviation per location
-- Identify outliers and potential interference
-- Consider time-of-day effects on propagation
-
-#### Model Validation:
-- Does the COST Hata model accurately predict your measurements?
-- What environmental factors might explain deviations?
-- How does building density affect the path loss exponent?
-
 ### ✅ Part 3 Deliverables
 
 - [ ] `rssi_logger.py`: Python script for collecting RSSI measurements
 - [ ] `rssi_data.csv`: Columns: `timestamp`, `rssi`, `location_label`, `distance_m`, `environment`
 - [ ] `link_budget_model.py`: COST Hata implementation and comparison logic
 - [ ] `comparison_plot.png`: Measured RSSI vs. distance with theoretical overlay
-- [ ] `analysis_notes.txt`: Technical report (2-3 pages) including:
+- [ ] `analysis_notes.txt`: Technical report (1-2 pages) including:
   - Location tracking methodology
   - Link budget parameter justification
   - Key findings from comparison
