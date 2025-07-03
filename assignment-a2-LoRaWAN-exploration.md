@@ -81,6 +81,18 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 
 ## 🚀 Getting Started
 
+### Prerequisites Checklist
+
+Before you begin, ensure you have:
+- [ ] TTGO ESP32 LoRa32 board (915 MHz with antenna)
+- [ ] Micro USB cable for programming
+- [ ] Arduino IDE installed (version 2.0 or later)
+- [ ] ESP32 board package installed in Arduino IDE
+- [ ] MCCI LoRaWAN LMIC Library installed
+- [ ] MQTT Explorer or similar MQTT client
+- [ ] Python 3.x with paho-mqtt library (Parts 2 & 3)
+- [ ] Basic understanding of Arduino programming
+
 ### Hardware & Software Requirements
 
 **Hardware Needed:**
@@ -91,6 +103,8 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 - Arduino IDE (version 2.0 or later)
 - ESP32 board package
 - MCCI LoRaWAN LMIC Library
+- MQTT Explorer (download from https://mqtt-explorer.com)
+- Python 3.x with paho-mqtt library
 
 ### 🔧 Initial Setup
 
@@ -114,11 +128,12 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 
 ## 🔵 Part 1 – LoRaWAN Uplink Test
 
-### 🎯 Objectives
+### 🎯 Learning Objectives
 
 - Configure TTGO ESP32 as LoRaWAN OTAA device
 - Set up uplinks on US915 frequency plan
 - Verify successful join and data transmission via MQTT
+- Understand LoRaWAN network architecture
 
 ### 📋 Step-by-Step Instructions
 
@@ -163,17 +178,19 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 3. Select correct board and port in Arduino IDE
 4. Compile and upload the sketch
 5. Open Serial Monitor (baud: 9600)
-6. Watch for `EV_JOINED` message
-7. Device will send uplinks periodically
+6. Watch for `EV_JOINED` message (this confirms successful network join)
+7. Device will send uplinks periodically after joining
 
 #### Step 4: Verify via MQTT
 
 **Download MQTT Explorer:** First, download and install MQTT Explorer from https://mqtt-explorer.com
 
 **Connection Setup:** Use the configuration as shown in [the screenshot](a2-material/mqtt-config.jpg) with these details:
-- **Broker:** `nam1.cloud.thethings.network:8883`
+- **Broker:** `nam1.cloud.thethings.network`
+- **Port:** `8883`
+- **Protocol:** `mqtt://`
 - **Username:** `test-dal@ttn`
-- **Password:** Non-interactive API key provided for you separately
+- **Password:** Non-interactive API key (provided separately)
 
 **Finding Your Device Data:** 
 - Once connected, use the search button in MQTT Explorer
@@ -181,15 +198,26 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 - You'll see packets appearing under your device's topic automatically
 - No need to manually subscribe to specific topics
 
-**Verification:** Confirm receipt of at least 5 uplink packets
+**Verification:** Confirm receipt of at least 5 uplink packets with timestamps
+
+### 🔧 Troubleshooting Part 1
+
+| Problem | Solution |
+|---------|----------|
+| Device not joining (`EV_JOINED` never appears) | Check DevEUI/AppEUI are in little-endian format, verify AppKey |
+| No data in MQTT Explorer | Ensure connection settings match exactly, check password |
+| Compilation errors | Verify LMIC library is installed, check board selection |
+| `FAILURE` messages in Serial Monitor | Usually indicates join failure - double-check all identifiers |
+| Device joins but no uplinks | Check if `do_send()` is being called in your code |
 
 ### ✅ Part 1 Deliverables
 
 - [ ] Screenshot from MQTT Explorer showing ≥5 uplinks from your device
-- [ ] `part1_uplink.ino` (identify these key elements with comments):
+- [ ] `part1_uplink.ino` with comments identifying:
   - Sending function and transmission period
-  - Join process handling
+  - Join process handling code
   - Event callback functions including packet reception
+  - Your device identifiers (DevEUI, AppEUI, AppKey)
 
 ---
 
@@ -216,32 +244,321 @@ Update the provided Arduino sketch to:
 
 where temperature ∈ [15, 30] °C and humidity ∈ [30, 60] %
 
+**Implementation hints:**
+- Use Arduino's `String` class or character arrays to build JSON
+- Ensure proper JSON formatting with quotes and commas
+- Convert the JSON string to bytes before transmission
+
 #### 2. Implement Python MQTT Subscriber
 
 Use the provided Python [template](a2-material/mqtt-template.py) script to:
 
-- Connect to The Things Stack MQTT broker and subscribe to your device's uplink topic (you may need to install the `paho-mqtt` library)
-- Decode the JSON payload and extract temperature and humidity values. Detailed documentation on data formats is provided [here](https://www.thethingsindustries.com/docs/integrations/data-formats/)
+- Connect to The Things Stack MQTT broker and subscribe to your device's uplink topic
+- Install required library: `pip install paho-mqtt`
+- Decode the JSON payload and extract temperature and humidity values
 - Log and plot:
   - Uplink frequency (Hz)
-  - RSSI (dBm)
+  - RSSI (dBm) - signal strength indicator
+- Save RSSI data to CSV file for analysis
+
+**Data format documentation:** Refer to [TTN data formats](https://www.thethingsindustries.com/docs/integrations/data-formats/)
 
 #### 3. Implement Downlink Control via MQTT
 
-You can refer to the TTN [documentation](https://www.thethingsindustries.com/docs/integrations/other-integrations/mqtt/) on how to connect an MQTT client and subscribe to uplinks or publish downlinks.
-
-Extend the Python script to send a downlink command:
+Extend the Python script to send downlink commands:
 - `0x01` → Turn **ON** the onboard LED
 - `0x00` → Turn **OFF** the LED
 
-Implement logic in the Arduino sketch to interpret and act on these commands.
+Implement logic in the Arduino sketch to:
+- Check for received downlink data in callbacks
+- Parse the command byte
+- Control the LED accordingly
+- Print confirmation to Serial Monitor
+
+**Reference:** [TTN MQTT Integration](https://www.thethingsindustries.com/docs/integrations/other-integrations/mqtt/)
+
+### 🔧 Implementation Guide
+
+#### Arduino JSON Payload Example:
+```cpp
+// In your do_send() function
+String jsonPayload = "{\"t\":" + String(random(15, 31)) + 
+                     ",\"h\":" + String(random(30, 61)) + "}";
+                     
+// Convert to bytes for transmission
+memcpy(mydata, jsonPayload.c_str(), jsonPayload.length());
+LMIC_setTxData2(1, mydata, jsonPayload.length(), 0);
+```
+
+#### Python MQTT Subscriber Structure:
+```python
+import paho.mqtt.client as mqtt
+import json
+import csv
+from datetime import datetime
+
+# Callback for receiving messages
+def on_message(client, userdata, msg):
+    payload = json.loads(msg.payload.decode())
+    # Extract and process data here
+```
 
 ### ✅ Part 2 Deliverables
 
-- [ ] `part2_payload.ino`: your updated and commented Arduino code including all the requirements
-- [ ] `downlink_screenshot.png`: showing LED control confirmation in Serial Monitor
-- [ ] `mqtt-test.py`: your modified Python MQTT client (with clear comments and example output)
-- [ ] Two plots visualizing signal quality data (frequency and RSSI)
-- [ ] `code-explanation.txt`: include:
-  - How the uplink message parsing was implemented and verified
-  - How the downlink interaction was implemented and verified
+- [ ] `part2_payload.ino`: Updated Arduino code with JSON payload and LED control
+- [ ] `downlink_screenshot.png`: Serial Monitor showing LED control confirmation
+- [ ] `mqtt-test.py`: Python MQTT client with clear comments
+- [ ] Two plots: Frequency vs Time and RSSI vs Time
+- [ ] `rssi_data.csv`: Logged RSSI samples with columns: `timestamp`, `rssi`
+- [ ] `code-explanation.txt`: 
+  - How uplink message parsing was implemented and verified
+  - How downlink interaction was implemented and verified
+  - Challenges faced and solutions
+
+---
+
+## 🟠 Part 3 – Link Budget and RF Propagation Analysis *(Graduate Students Only)*
+
+### 🎯 Learning Objectives
+
+- Conduct empirical signal strength measurements in a real LoRaWAN deployment
+- Model urban RF propagation using the COST Hata model
+- Compare theoretical predictions to empirical data
+- Understand factors affecting long-range wireless communication
+
+### 📋 Requirements
+
+#### 1. RSSI Measurement Campaign
+
+Use the provided Python [template](a2-material/mqtt-template.py) script to:
+
+- Connect to The Things Stack MQTT broker and subscribe to your device's uplink topic
+- Install required library: `pip install paho-mqtt`
+- Decode and automatically log **RSSI values** and **timestamps** for each received packet
+- Refer to [TTN data formats](https://www.thethingsindustries.com/docs/integrations/data-formats/)
+
+#### 2. Associate RSSI Samples with Device Locations
+
+Conduct measurements from at least **three distinct physical locations** on or near campus with different propagation conditions.
+
+**Each location must include:**
+
+- An estimated distance (in meters) to the gateway (Goldberg Building rooftop)
+- A brief description of the propagation environment
+- At least **ten RSSI samples**
+
+**Location selection guidelines:**
+- **Location 1:** Line-of-sight (e.g., open area with clear view of Goldberg Building)
+- **Location 2:** Partially obstructed (e.g., behind buildings, trees)
+- **Location 3:** Heavily obstructed or indoor location
+
+**Tracking methodology:** You must devise your own method to associate RSSI measurements with locations. Consider:
+- Manual logging with timestamps
+- GPS coordinates from smartphone
+- Automated location tags in your Python script
+
+#### 3. Theoretical Propagation Modeling
+
+Implement the [COST Hata urban path loss model](https://en.wikipedia.org/wiki/COST_Hata_model) to estimate expected received power.
+
+**Link budget parameters to determine:**
+- Transmit power (check TTGO ESP32 specifications)
+- Antenna gains (typically 2-3 dBi for omnidirectional)
+- Cable/connector losses
+- Frequency (915 MHz)
+- Antenna heights
+
+**COST Hata model implementation:**
+```python
+# Path loss calculation
+PL = 46.3 + 33.9*log10(f) - 13.82*log10(h_b) - a(h_m) + 
+     (44.9 - 6.55*log10(h_b))*log10(d) + C_m
+```
+
+Where you must justify values for all parameters.
+
+#### 4. Data Analysis and Comparison
+
+- Compare **measured RSSI** with **predicted received power**
+- Plot received power vs. distance (measured and theoretical)
+- Calculate mean absolute error (MAE) for each location
+- Analyze deviations and discuss possible causes
+
+### 🔧 Analysis Guidelines
+
+#### Statistical Analysis:
+- Calculate mean RSSI and standard deviation per location
+- Identify outliers and potential interference
+- Consider time-of-day effects on propagation
+
+#### Model Validation:
+- Does the COST Hata model accurately predict your measurements?
+- What environmental factors might explain deviations?
+- How does building density affect the path loss exponent?
+
+### ✅ Part 3 Deliverables
+
+- [ ] `rssi_logger.py`: Python script for collecting RSSI measurements
+- [ ] `rssi_data.csv`: Columns: `timestamp`, `rssi`, `location_label`, `distance_m`, `environment`
+- [ ] `link_budget_model.py`: COST Hata implementation and comparison logic
+- [ ] `comparison_plot.png`: Measured RSSI vs. distance with theoretical overlay
+- [ ] `analysis_notes.txt`: Technical report (2-3 pages) including:
+  - Location tracking methodology
+  - Link budget parameter justification
+  - Key findings from comparison
+  - Real-world deviation analysis
+  - Suggestions for improving coverage
+
+---
+
+## 📦 Final Submission Requirements
+
+Submit all required materials as **one zip file** on Brightspace.
+
+### File Structure
+
+#### Undergraduate Students:
+```
+A2_GroupXX_Undergraduate/
+├── Part1_Uplink/
+│   ├── part1_uplink.ino
+│   └── mqtt_screenshot.png
+├── Part2_Payload/
+│   ├── part2_payload.ino
+│   ├── downlink_screenshot.png
+│   ├── mqtt-test.py
+│   ├── frequency_plot.png
+│   ├── rssi_plot.png
+│   ├── rssi_data.csv
+│   └── code-explanation.txt
+└── README.txt
+```
+
+#### Graduate Students:
+```
+A2_GroupXX_Graduate/
+├── Part1_Uplink/
+│   ├── part1_uplink.ino
+│   └── mqtt_screenshot.png
+├── Part3_Propagation/
+│   ├── rssi_logger.py
+│   ├── rssi_data.csv
+│   ├── link_budget_model.py
+│   ├── comparison_plot.png
+│   └── analysis_notes.txt
+└── README.txt
+```
+
+### README.txt Template
+```
+Assignment A2 - LoRaWAN Exploration
+Group XX: [Your Group Number]
+Track: [Undergraduate / Graduate]
+
+Team Members:
+- Student 1 Name (ID: xxxxxxx) - [Undergraduate/Graduate]
+- Student 2 Name (ID: xxxxxxx) - [Undergraduate/Graduate]
+
+Work Distribution:
+- Part 1 (LoRaWAN Uplink): [Who did what]
+- Part 2 (Payload + Downlink): [Undergraduate only - who did what]
+- Part 3 (Propagation Analysis): [Graduate only - who did what]
+
+Project Summary:
+Device Identifiers Used: [DevEUI from your assignment]
+Gateway Location: Goldberg Building Rooftop
+Part 2 Implementation: [Undergraduate: Brief description of JSON payload format]
+Part 3 Locations: [Graduate: List of measurement locations chosen]
+
+Additional Notes:
+- [Challenges faced and solutions]
+- [Interesting observations about LoRaWAN behavior]
+- [Questions or suggestions]
+
+Testing Environment:
+- Location: [Where you conducted testing]
+- Date/Time: [When measurements were taken]
+- Weather conditions: [If relevant for Part 3]
+- Software versions: [Arduino IDE, Python version, libraries]
+
+Special Instructions:
+- [Any special setup needed]
+- [Known limitations or issues]
+- [Additional dependencies]
+```
+
+---
+
+## 📊 Grading Rubric
+
+### Undergraduate Track
+| Component | Points | Description |
+|-----------|--------|-------------|
+| Part 1 - LoRaWAN Uplink | 40 | Successful join and uplink transmission with documentation |
+| Part 2 - Payload & Downlink | 50 | JSON payload, MQTT analysis, and bidirectional communication |
+| Code Quality & Documentation | 10 | Clean code, proper comments, professional submission |
+| **Total** | **100** | |
+
+### Graduate Track
+| Component | Points | Description |
+|-----------|--------|-------------|
+| Part 1 - LoRaWAN Uplink | 30 | Successful join and uplink transmission with documentation |
+| Part 3 - Propagation Analysis | 60 | Rigorous measurement campaign and theoretical comparison |
+| Code Quality & Documentation | 10 | Clean code, proper analysis, professional submission |
+| **Total** | **100** | |
+
+---
+
+## 📚 Extended Resources
+
+### LoRaWAN References
+- [LoRa Alliance Technical Resources](https://lora-alliance.org/technical-resources/)
+- [The Things Network Documentation](https://www.thethingsindustries.com/docs/)
+- [MCCI LMIC Library Documentation](https://github.com/mcci-catena/arduino-lmic)
+
+### MQTT Tools and Guides
+- [MQTT Explorer](https://mqtt-explorer.com/) - Recommended MQTT client
+- [Paho MQTT Python Client](https://pypi.org/project/paho-mqtt/) - Python library
+- [MQTT Essentials](https://www.hivemq.com/mqtt-essentials/) - Protocol guide
+
+### RF Propagation Resources
+- [COST Hata Model Calculator](https://www.pasternack.com/t-calculator-hata-urban-propagation-loss.aspx)
+- [RF Link Budget Guide](https://www.everythingrf.com/rf-calculators/rf-link-budget-calculator)
+
+---
+
+## 🆘 Getting Help
+
+### Where to Get Help
+- **Teams Discussion Forum:** Post general questions
+- **Office Hours:** Bring specific technical problems
+- **Lab Sessions:** Get hands-on assistance with hardware
+
+### Common Issues and Solutions
+
+**"EV_JOIN_FAILED" or device won't join:**
+- Double-check DevEUI and AppEUI are little-endian
+- Verify AppKey is correct and big-endian
+- Ensure gateway is online and in range
+- Check regional frequency configuration
+
+**No data in MQTT Explorer:**
+- Verify broker address and port (8883)
+- Check username includes @ttn suffix
+- Ensure password (API key) is correct
+- Look for connection status in MQTT Explorer
+
+**Python script connection issues:**
+- Install paho-mqtt: `pip install paho-mqtt`
+- Use port 8883 for secure connection
+- Include full topic path with v3 prefix
+
+**Poor RSSI or no signal:**
+- Check antenna is properly connected
+- Ensure device is oriented correctly
+- Move to location with better line-of-sight
+- Verify transmit power settings
+
+---
+
+**Questions?** Post on Teams with error messages, screenshots, and code snippets for fastest help!
