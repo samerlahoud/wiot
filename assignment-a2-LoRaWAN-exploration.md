@@ -178,3 +178,54 @@ If they are commented (have `//` in front), remove the `//` to enable them.
   - Sending function and transmission period
   - Join process handling
   - Event callback functions including packet reception
+
+
+## 🟩 Part 2 – Payload + Downlink Command *(Undergraduate Students Only)*
+
+### 🎯 Learning Objectives
+
+* Transmit application-layer data in a structured JSON format
+* Process and validate received payloads using a Python MQTT subscriber
+* Analyze key radio parameters (frequency, RSSI, SNR) through data visualization
+* Implement actuator control via MQTT-based downlink messaging
+
+### 📋 Requirements
+
+1. **Modify the provided Arduino sketch** to:
+
+   * Send a JSON-encoded payload every 60 seconds containing:
+
+     ```json
+     {"t": <random_temperature>, "h": <random_humidity>}
+     ```
+
+     where temperature ∈ \[15, 30] °C and humidity ∈ \[30, 60] %
+
+2. **Use the provided Python script (`mqtt-test.py`)** to:
+
+   * Connect to The Things Stack MQTT broker and subscribe to your device’s uplink topic
+   * Decode the JSON payload and extract temperature and humidity values. A detailed documentation on data formats is provided [here](https://www.thethingsindustries.com/docs/integrations/data-formats/) 
+   * Log and plot:
+
+     * Uplink frequency (Hz)
+     * RSSI (dBm)
+
+3. **Implement downlink control via MQTT**
+You can refer to the TTN [documentation](https://www.thethingsindustries.com/docs/integrations/other-integrations/mqtt/) on how to connect an MQTT client and subscribe to uplinks or publish downlinks.
+
+   * Extend the Python script to send a downlink command:
+
+     * `0x01` → Turn **ON** the onboard LED
+     * `0x00` → Turn **OFF** the LED
+   * Implement logic in the Arduino sketch to interpret and act on these commands
+
+### ✅ Deliverables
+
+* `part2_payload.ino`: your updated and commented Arduino code including all the requirements
+* `downlink_screenshot.png`: showing LED control confirmation in Serial Monitor
+* `mqtt-test.py`: your modified Python MQTT client (with clear comments and example output)
+* Two plots visualizing signal quality data (frequency and RSSI)
+* `code-explanation.txt`: include:
+
+  * How the uplink message parsing was implemented and verified
+  * How the downlink interaction was implemented and verified
