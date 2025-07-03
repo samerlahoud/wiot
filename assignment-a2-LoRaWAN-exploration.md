@@ -201,7 +201,7 @@ If they are commented (have `//` in front), remove the `//` to enable them.
 
      where temperature ∈ \[15, 30] °C and humidity ∈ \[30, 60] %
 
-2. **Use the provided Python script (`mqtt-test.py`)** to:
+2. **Use the provided Python [template](a2-material/mqtt-template.py) script** to:
 
    * Connect to The Things Stack MQTT broker and subscribe to your device’s uplink topic
    * Decode the JSON payload and extract temperature and humidity values. A detailed documentation on data formats is provided [here](https://www.thethingsindustries.com/docs/integrations/data-formats/) 
