@@ -5,7 +5,7 @@
 
 **Submission:** Upload as **one zip file** on Brightspace
 
-**Project Teams:** Students must form their project groups (4 students per group or simply a merge of two groups as defined during assignments) by **Tuesday, July 8, 2025 at 11:59 PM**. Groups not submitted by the deadline will be assigned randomly.
+**Project Teams:** Students must form their project groups (4 students per group or simply a merge of two groups as defined during assignments) and choose one project by **Tuesday, July 8, 2025 at 11:59 PM**. Groups not submitted by the deadline will be assigned randomly.
 
 # Project P1 – BLE Contact Tracer with Exposure Logic and Energy Budget
 
