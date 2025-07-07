@@ -7,37 +7,65 @@
 
 **Project Teams:** Students must form their project groups (4 students per group or simply a merge of two groups as defined during assignments) and choose one project by **Tuesday, July 8, 2025 at 11:59 PM**. Groups not submitted by the deadline will be assigned randomly.
 
----
+**Mid-Project Review:** **Tuesday, July 22, 2025** - In-class progress review and troubleshooting session
+
+<!--
+## 📋 Mid-Project Review Requirements (July 22, 2025)
+
+Each team must present a **5-minute progress update** during the July 22nd lecture covering:
+
+### Required Demo Components (Easily Verifiable):
+- [ ] **Working prototype demonstration**: Show basic functionality on hardware
+- [ ] **Code compilation**: Demonstrate that current code compiles and runs
+- [ ] **Data collection progress**: Show sample data files (even if incomplete)
+- [ ] **Team work distribution**: Clear explanation of who is doing what
+
+### Progress Checklist:
+- [ ] Hardware setup complete and tested
+- [ ] Core functionality implemented (advertising/scanning for P1, or DISCOVER/ROSTER for P2)
+- [ ] Initial data collection begun
+- [ ] Report outline drafted
+- [ ] Identified challenges and mitigation strategies
+
+### Deliverables for Review:
+- **Brief progress slides** (3-4 slides max): Current status, preliminary results, remaining work
+- **Working code demonstration** (must compile and show basic functionality)
+- **Sample data** (CSV file with at least 10 data points)
+
+**Note**: This review is worth 10% of your final project grade and will help identify teams needing additional support.
+-->
 
 ## 📋 General Requirements
 
 ### README File
-Each submission must include a `README.txt` file containing (see Assignment A1 for template structure):
+Each submission must include a `README.txt` file for **reproducibility and setup** (see Assignment A1 for template structure):
 - **Team information**: Group number, names, student IDs, track designation
 - **Project choice**: P1 or P2 with brief rationale
 - **Work distribution**: Who contributed to each component
 - **File structure**: Brief description of each directory/file
-- **Hardware setup**: List of components, connections, and testing environment
-- **Software dependencies**: Required libraries, tools, versions used
+- **Hardware setup**: Complete parts list, pin connections, assembly instructions
+- **Software dependencies**: Required libraries, tools, specific versions used
 - **Compilation/execution instructions**: Step-by-step setup and run commands
-- **Project summary**: Key findings and observations
-- **Known issues**: Any limitations, bugs, or special instructions
-- **Testing details**: Location, equipment used, completion dates
+- **Reproduction guide**: How to replicate your experiments
+- **Troubleshooting**: Known bugs, workarounds, common setup issues
 
 ### Report Format and Expectations
-Your `report.pdf` should be structured as a **scientific technical report** following these guidelines:
+Your `report.pdf` should be structured as a **scientific technical report** focused on **analysis and findings**:
 - **Length**: 3-4 pages minimum, 6 pages maximum (excluding references)
 - **Format**: Scientific report format with clear section headers
-- **Structure**: Abstract/Summary, Introduction, Methods, Results, Discussion, Conclusion
-- **References**: Include relevant references to standards, documentation, tools, and resources used to validate your approach and provide context (academic papers not required, but technical documentation and standards are valuable)
+- **Structure**: Abstract, Introduction, Methods, Results, Discussion, Conclusion
+- **Focus**: Experimental design, data analysis, performance evaluation, and scientific insights
+- **References**: Include relevant technical documentation, standards, and tools used
 
 ### Statistical Analysis Requirements
-Your experimental evaluation must include appropriate statistical measures consistent with Assignment A1:
+Your experimental evaluation should include appropriate statistical measures consistent with Assignment A1. The following list provides examples of statistical analysis that may be relevant to your project:
 - **Descriptive statistics**: Mean, median, standard deviation for all quantitative metrics
 - **95% confidence intervals**: For key performance metrics (RSSI, delivery rates, delays, etc.)
 - **Correlation analysis**: Pearson correlation coefficients where relationships are examined (e.g., RSSI vs. distance, power vs. battery life)
 - **Error analysis**: Quantify measurement uncertainty and systematic errors
 - **Sample sizes**: Minimum 30 measurements per test condition for statistical validity
+
+**Tools for Analysis**: Statistical analysis and visualization can be performed using Python (matplotlib, scipy, pandas), MATLAB, R, or advanced Excel functions. Choose the tool that best fits your team's experience and project needs.
 
 ---
 
@@ -80,14 +108,14 @@ You will define and implement an exposure rule (e.g., "cumulative proximity ≥ 
 
 ## 📦 Required Deliverables
 
-| Component               | Description                                                                |
-| ----------------------- | -------------------------------------------------------------------------- |
-| `README.txt`            | Team info, setup instructions, file structure (see general requirements)  |
-| `firmware/`             | BLE scanner + advertiser source code, with exposure logic                  |
-| `data/`                 | CSV log of detected contacts: timestamp, peer ID, RSSI, duration           |
-| `plots/`                | RSSI vs. distance, energy vs. scan settings, detection accuracy            |
-| `report.pdf`            | 3-6 pages: design, calibration setup, detection metrics, power analysis   |
-| `demo.mp4` *(optional)* | Video showing detection logic in action (LED alert, serial log)            |
+| Component               | Description                                                                | Verification Criteria |
+| ----------------------- | -------------------------------------------------------------------------- | --------------------- |
+| `README.txt`            | Team info, setup instructions, file structure (see general requirements)  | Complete template fields, clear instructions |
+| `firmware/`             | BLE scanner + advertiser source code, with exposure logic                  | Code compiles, well-commented, implements core functionality |
+| `data/`                 | CSV log of detected contacts: timestamp, peer ID, RSSI, duration           | Minimum 30 data points per condition, proper CSV format |
+| `plots/`                | RSSI vs. distance, energy vs. scan settings, detection accuracy            | Clear labels, appropriate scales, statistical annotations |
+| `report.pdf`            | 3-6 pages: design, calibration setup, detection metrics, power analysis   | Follows scientific report structure, includes required sections |
+| `demo.mp4` *(optional)* | Video showing detection logic in action (LED alert, serial log)            | Clear demonstration of working system |
 
 ---
 
@@ -156,14 +184,14 @@ This architecture allows peer-like communication within the strict timing and en
 
 ## 📦 Required Deliverables
 
-| Component               | Description                                                                |
-| ----------------------- | -------------------------------------------------------------------------- |
-| `README.txt`            | Team info, setup instructions, file structure (see general requirements)  |
-| `firmware/`             | Source code for all participating LoRaWAN nodes (DISCOVER + COMMAND logic) |
-| `data/`                 | CSV logs: message timestamps, target IDs, success/failure, SF, RSSI        |
-| `plots/`                | Roster accuracy, delivery success rate, end-to-end delay graphs            |
-| `report.pdf`            | 3-6 pages: architecture, experiments, analysis, limitations               |
-| `demo.mp4` *(optional)* | Short walkthrough of interaction and debugging output                      |
+| Component               | Description                                                                | Verification Criteria |
+| ----------------------- | -------------------------------------------------------------------------- | --------------------- |
+| `README.txt`            | Team info, setup instructions, file structure (see general requirements)  | Complete template fields, clear instructions |
+| `firmware/`             | Source code for all participating LoRaWAN nodes (DISCOVER + COMMAND logic) | Code compiles, well-commented, implements messaging protocol |
+| `data/`                 | CSV logs: message timestamps, target IDs, success/failure, SF, RSSI        | Minimum 30 data points per condition, proper CSV format |
+| `plots/`                | Roster accuracy, delivery success rate, end-to-end delay graphs            | Clear labels, appropriate scales, statistical annotations |
+| `report.pdf`            | 3-6 pages: architecture, experiments, analysis, limitations               | Follows scientific report structure, includes required sections |
+| `demo.mp4` *(optional)* | Short walkthrough of interaction and debugging output                      | Clear demonstration of working system |
 
 ---
 
