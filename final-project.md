@@ -12,8 +12,8 @@
 - **Project P2**: 2 × TTGO LoRa32 boards per team
 - **Additional devices**: May be provided if available and required by your specific design (request during mid-project review)
 
-**Mid-Project Review:** **Tuesday, July 22, 2025** - In-class progress review and troubleshooting session (attendance mandatory for all teams)
-
+**Mid-Project Review:** **Tuesday, July 22, 2025** - In-class progress review and troubleshooting session 
+<!--
 ## 📋 Mid-Project Review Requirements (July 22, 2025)
 
 Each team must present a **5-minute progress update** during the July 22nd lecture covering:
@@ -39,6 +39,7 @@ Each team must present a **5-minute progress update** during the July 22nd lectu
 **Note**: This review is worth 10% of your final project grade and will help identify teams needing additional support.
 
 ---
+-->
 
 ## 📋 General Requirements
 
