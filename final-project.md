@@ -7,6 +7,40 @@
 
 **Project Teams:** Students must form their project groups (4 students per group or simply a merge of two groups as defined during assignments) and choose one project by **Tuesday, July 8, 2025 at 11:59 PM**. Groups not submitted by the deadline will be assigned randomly.
 
+---
+
+## 📋 General Requirements
+
+### README File
+Each submission must include a `README.txt` file containing (see Assignment A1 for template structure):
+- **Team information**: Group number, names, student IDs, track designation
+- **Project choice**: P1 or P2 with brief rationale
+- **Work distribution**: Who contributed to each component
+- **File structure**: Brief description of each directory/file
+- **Hardware setup**: List of components, connections, and testing environment
+- **Software dependencies**: Required libraries, tools, versions used
+- **Compilation/execution instructions**: Step-by-step setup and run commands
+- **Project summary**: Key findings and observations
+- **Known issues**: Any limitations, bugs, or special instructions
+- **Testing details**: Location, equipment used, completion dates
+
+### Report Format and Expectations
+Your `report.pdf` should be structured as a **scientific technical report** following these guidelines:
+- **Length**: 3-4 pages minimum, 6 pages maximum (excluding references)
+- **Format**: Scientific report format with clear section headers
+- **Structure**: Abstract/Summary, Introduction, Methods, Results, Discussion, Conclusion
+- **References**: Include relevant references to standards, documentation, tools, and resources used to validate your approach and provide context (academic papers not required, but technical documentation and standards are valuable)
+
+### Statistical Analysis Requirements
+Your experimental evaluation must include appropriate statistical measures consistent with Assignment A1:
+- **Descriptive statistics**: Mean, median, standard deviation for all quantitative metrics
+- **95% confidence intervals**: For key performance metrics (RSSI, delivery rates, delays, etc.)
+- **Correlation analysis**: Pearson correlation coefficients where relationships are examined (e.g., RSSI vs. distance, power vs. battery life)
+- **Error analysis**: Quantify measurement uncertainty and systematic errors
+- **Sample sizes**: Minimum 30 measurements per test condition for statistical validity
+
+---
+
 # Project P1 – BLE Contact Tracer with Exposure Logic and Energy Budget
 
 ## 📡 Project Overview
@@ -48,10 +82,11 @@ You will define and implement an exposure rule (e.g., "cumulative proximity ≥ 
 
 | Component               | Description                                                                |
 | ----------------------- | -------------------------------------------------------------------------- |
+| `README.txt`            | Team info, setup instructions, file structure (see general requirements)  |
 | `firmware/`             | BLE scanner + advertiser source code, with exposure logic                  |
 | `data/`                 | CSV log of detected contacts: timestamp, peer ID, RSSI, duration           |
 | `plots/`                | RSSI vs. distance, energy vs. scan settings, detection accuracy            |
-| `report.pdf`            | Max 3 pages: design, calibration setup, detection metrics, power analysis |
+| `report.pdf`            | 3-6 pages: design, calibration setup, detection metrics, power analysis   |
 | `demo.mp4` *(optional)* | Video showing detection logic in action (LED alert, serial log)            |
 
 ---
@@ -60,11 +95,12 @@ You will define and implement an exposure rule (e.g., "cumulative proximity ≥ 
 
 | Category                                                   | Points  |
 | ---------------------------------------------------------- | ------- |
-| BLE protocol design (advertising, scanning, ID management) | 20      |
-| Encounter logging and proximity estimation logic           | 20      |
+| BLE protocol design (advertising, scanning, ID management) | 15      |
+| Encounter logging and proximity estimation logic           | 15      |
 | RSSI–distance calibration and exposure analysis            | 20      |
 | Energy measurement and optimization                        | 20      |
-| Final report, figures, code structure                      | 20      |
+| Statistical analysis and experimental rigor                | 15      |
+| Final report quality, figures, and code documentation      | 15      |
 | **Total**                                                  | **100** |
 
 # Project P2 – LoRaWAN Interactive Peer-Messaging Service
@@ -122,10 +158,11 @@ This architecture allows peer-like communication within the strict timing and en
 
 | Component               | Description                                                                |
 | ----------------------- | -------------------------------------------------------------------------- |
+| `README.txt`            | Team info, setup instructions, file structure (see general requirements)  |
 | `firmware/`             | Source code for all participating LoRaWAN nodes (DISCOVER + COMMAND logic) |
 | `data/`                 | CSV logs: message timestamps, target IDs, success/failure, SF, RSSI        |
 | `plots/`                | Roster accuracy, delivery success rate, end-to-end delay graphs            |
-| `report.pdf`            | Max 3 pages: architecture, experiments, analysis, limitations             |
+| `report.pdf`            | 3-6 pages: architecture, experiments, analysis, limitations               |
 | `demo.mp4` *(optional)* | Short walkthrough of interaction and debugging output                      |
 
 ---
@@ -134,9 +171,10 @@ This architecture allows peer-like communication within the strict timing and en
 
 | Category                                            | Points  |
 | --------------------------------------------------- | ------- |
-| DISCOVER and peer messaging functionality           | 20      |
-| ROSTER parsing and device discovery accuracy        | 20      |
+| DISCOVER and peer messaging functionality           | 15      |
+| ROSTER parsing and device discovery accuracy        | 15      |
 | End-to-end delay and delivery evaluation            | 20      |
 | False positives/negatives and message loss analysis | 20      |
-| Energy estimation and design trade-offs             | 20      |
+| Statistical analysis and experimental rigor         | 15      |
+| Final report quality, figures, and code documentation | 15      |
 | **Total**                                           | **100** |
