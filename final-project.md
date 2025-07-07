@@ -7,9 +7,13 @@
 
 **Project Teams:** Students must form their project groups (4 students per group or simply a merge of two groups as defined during assignments) and choose one project by **Tuesday, July 8, 2025 at 11:59 PM**. Groups not submitted by the deadline will be assigned randomly.
 
-**Mid-Project Review:** **Tuesday, July 22, 2025** - In-class progress review and troubleshooting session
+**Hardware Provided:**
+- **Project P1**: 2 × ESP32-C6 development boards per team
+- **Project P2**: 2 × TTGO LoRa32 boards per team
+- **Additional devices**: May be provided if available and required by your specific design (request during mid-project review)
 
-<!--
+**Mid-Project Review:** **Tuesday, July 22, 2025** - In-class progress review and troubleshooting session (attendance mandatory for all teams)
+
 ## 📋 Mid-Project Review Requirements (July 22, 2025)
 
 Each team must present a **5-minute progress update** during the July 22nd lecture covering:
@@ -33,7 +37,8 @@ Each team must present a **5-minute progress update** during the July 22nd lectu
 - **Sample data** (CSV file with at least 10 data points)
 
 **Note**: This review is worth 10% of your final project grade and will help identify teams needing additional support.
--->
+
+---
 
 ## 📋 General Requirements
 
@@ -75,7 +80,7 @@ Your experimental evaluation should include appropriate statistical measures con
 
 In the context of virus outbreaks such as COVID-19, digital contact tracing has emerged as a promising tool for early detection and transmission mitigation. This project builds on those principles to explore decentralized BLE-based solutions for proximity sensing, privacy preservation, and energy-efficient deployment in wireless IoT systems.
 
-In this project, you are required to build a decentralized BLE-based contact tracing system using **ESP32-C6 devices**. Each device must advertise a randomized identifier and simultaneously scan for nearby identifiers. Devices should log all contact encounters with associated timestamps and RSSI values, enabling proximity estimation and exposure tracking.
+In this project, you are required to build a decentralized BLE-based contact tracing system using the **2 ESP32-C6 devices provided to your team**. Each device must advertise a randomized identifier and simultaneously scan for nearby identifiers. Devices should log all contact encounters with associated timestamps and RSSI values, enabling proximity estimation and exposure tracking.
 
 You will define and implement an exposure rule (e.g., "cumulative proximity ≥ 5 minutes within 1.5 meters"), calibrate the RSSI–distance relationship through controlled experiments, and evaluate the system's detection accuracy, false positives/negatives, and energy consumption. Data analysis can be performed locally on the devices or post-processed on a PC.
 
@@ -135,7 +140,7 @@ You will define and implement an exposure rule (e.g., "cumulative proximity ≥ 
 
 ## 📡 Project Overview
 
-In large-scale sensor deployments using LoRaWAN, devices can only receive downlink messages immediately following their own uplinks. This constraint complicates direct communication between devices. In this project, you will implement a lightweight, asynchronous messaging protocol where any device can initiate a communication session with another peer by interacting with a centralized application server.
+In large-scale sensor deployments using LoRaWAN, devices can only receive downlink messages immediately following their own uplinks. This constraint complicates direct communication between devices. In this project, you will implement a lightweight, asynchronous messaging protocol where any device can initiate a communication session with another peer by interacting with a centralized application server using the **2 TTGO LoRa32 boards provided to your team**.
 
 The system works as follows:
 
