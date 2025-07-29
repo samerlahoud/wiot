@@ -1,4 +1,4 @@
-# 🏗️ Classroom MQTT Activity: Publish, Subscribe, and Explore (Personalized)
+# 🏗️ Classroom MQTT Activity: Publish, Subscribe, and Explore
 
 **Broker:**
 - URL: `broker.hivemq.com`
