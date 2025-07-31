@@ -73,7 +73,7 @@ All messages pass through the **MQTT Broker**. The publisher does not send direc
 2. **Student 1 (Publisher):**
 
    ```bash
-   mosquitto_pub -h broker.hivemq.com -t wiot/alice/basic -m "Hello MQTT World!"
+   mosquitto_pub -h broker.hivemq.com -t wiot/alice/basic -m "Hello MQTT World"
    ```
 
 ### ✅ Observation:
