@@ -178,7 +178,7 @@ dev_eui;app_eui;app_key
 - You'll see packets appearing under your device's topic automatically
 - MQTT Explorer shows RSSI values and generates charts automatically
 
-### 🔧 Troubleshooting Part 1
+### 🔧 Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
@@ -188,7 +188,7 @@ dev_eui;app_eui;app_key
 | `FAILURE` messages in Serial Monitor | Usually indicates join failure - double-check all identifiers |
 | Device joins but no uplinks | Check if `do_send()` is being called in your code |
 
-### ✅ Part 1 Deliverables
+### ✅ Deliverables
 
 Submit the following files documenting your work:
 
@@ -227,7 +227,7 @@ This is an entirely **optional** bonus challenge that can earn you up to **10 ad
 
 **Your Task:**
 1. Take your programmed TTGO device to progressively farther outdoor locations
-2. Use **MQTT Explorer** (which you already have from Part 1) to monitor incoming packets in real-time
+2. Use **MQTT Explorer** to monitor incoming packets in real-time
 3. Move farther away until you reach your maximum range
 4. Document your achievement!
 
@@ -327,9 +327,6 @@ A2_GroupXX/
 
 ### 🤔 Bonus Challenge FAQ
 
-**Q: Do I need to write Python code?**  
-A: No! Just use MQTT Explorer that you already set up in Part 1.
-
 **Q: How do I know if I'm still connected?**  
 A: Watch MQTT Explorer - if you see new packets appearing with recent timestamps, you're connected. The RSSI chart will also update in real-time.
 
@@ -387,7 +384,7 @@ Team Members:
 - Student 2 Name (ID: xxxxxxx) - [Undergraduate/Graduate]
 
 Work Distribution:
-- Part 1 (LoRaWAN Uplink): [Who did what]
+- LoRaWAN Uplink: [Who did what]
 - Bonus Challenge (if attempted): [Who did what]
 
 Project Summary:
@@ -402,8 +399,8 @@ Additional Notes:
 - [Any questions or suggestions]
 
 Testing Environment:
-- Part 1 Testing Location: [Where you verified your device works]
-- Part 1 Testing Date/Time: [When you completed setup]
+- Testing Location: [Where you verified your device works]
+- Testing Date/Time: [When you completed setup]
 - Bonus Testing Date/Time: [If applicable]
 - Weather Conditions: [If relevant for bonus challenge]
 - Software Versions: [Arduino IDE version, library versions]
