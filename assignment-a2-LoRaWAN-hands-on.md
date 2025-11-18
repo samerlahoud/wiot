@@ -74,7 +74,7 @@ This setup mirrors real-world IoT deployments where devices communicate through 
 
 | Component | Requirements | Points |
 |-----------|-------------|--------|
-| **Part 1 – LoRaWAN Uplink** | All students (mostly completed in-class tutorial) | 100 points  |
+| **Part 1 – LoRaWAN Uplink** | All students (mostly completed in-class tutorial) | 100 points |
 | **Bonus – Maximum Range Challenge** | Optional for all students | Up to 10 bonus points |
 
 ---
