@@ -260,29 +260,17 @@ Create a simple report with:
 
 ### 🎓 Graduate Student Extension
 
-**Simple Free Space Path Loss (FSPL) Analysis:**
+**Path Loss Analysis:**
 
-Calculate the theoretical expected received signal strength at your maximum range location:
-
-```
-FSPL (dB) = 20·log₁₀(d_km) + 20·log₁₀(915) + 32.44
-Expected RSSI (dBm) ≈ TX_Power - FSPL + Antenna_Gains
-```
-
-**Use these parameters:**
-- TX Power: 14 dBm (device transmit power)
-- Gateway antenna gain: 3 dBi
-- Device antenna gain: 2 dBi
-- Frequency: 915 MHz
-- Distance: your measured distance in km
+Calculate the theoretical expected received signal strength at your maximum range location using an appropriate path loss model.
 
 **Include in your report:**
-- Show your FSPL calculation step-by-step
+- Show your path loss calculation step-by-step
 - Calculate expected RSSI
 - Compare to your measured average RSSI from MQTT Explorer
 - Write one paragraph (4-5 sentences) discussing:
   - How close was theory to reality?
-  - What real-world factors does FSPL not account for?
+  - What real-world factors does path loss not account for?
   - Why might there be differences between predicted and measured values?
 
 ### 💡 Tips for Maximum Range
@@ -321,7 +309,7 @@ A2_GroupXX/
 │   ├── max_range_screenshot.png
 │   ├── location_photo.jpg (optional)
 │   └── range_analysis.txt (or .pdf)
-│   └── fspl_calculations.txt (graduate students only)
+│   └── path_loss_calculations.txt (graduate students only)
 └── README.txt
 ```
 
@@ -370,7 +358,7 @@ A2_GroupXX/
 │   ├── max_range_screenshot.png
 │   ├── location_photo.jpg (optional)
 │   ├── range_analysis.txt
-│   └── fspl_calculations.txt (graduate students only)
+│   └── path_loss_calculations.txt (graduate students only)
 └── README.txt
 ```
 
@@ -425,7 +413,6 @@ Special Instructions:
 - [TTN MQTT Integration Guide](https://www.thethingsindustries.com/docs/integrations/mqtt/)
 
 ### RF Propagation Resources (For Bonus Challenge)
-- [Free Space Path Loss Calculator](https://www.everythingrf.com/rf-calculators/free-space-path-loss-calculator)
 - [RF Link Budget Basics](https://www.everythingrf.com/community/what-is-link-budget)
 
 ### Distance Measurement Tools
