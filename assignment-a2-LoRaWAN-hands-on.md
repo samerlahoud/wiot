@@ -147,6 +147,16 @@ During the tutorial session, you:
 4. Set up MQTT Explorer and observed uplink packets
 5. Understood the LoRaWAN architecture and data flow
 
+### Program and Test
+
+- Insert your converted identifiers into the provided [template](a2-material/rnd-test/rnd-test.ino)
+- Connect TTGO ESP32 to your computer
+- Select correct board and port in Arduino IDE
+- Compile and upload the sketch
+- Open Serial Monitor (baud: 9600)
+- Watch for EV_JOINED message (this confirms successful network join)
+- Device will send uplinks periodically after joining
+
 ### 🔑 Device Identifiers Reference
 
 You received a CSV file with identifiers in this format:
