@@ -8,8 +8,6 @@
 
 # Final Project – BLE-Based Luggage cluster Detection System
 
----
-
 ## 📡 Project Overview
 
 In this project, you will develop a BLE-based system to detect and monitor a *cluster* of tagged luggage moving together in proximity. The goal is to track whether a set of ESP32-C6 devices, each representing a piece of luggage, remain consistently within a defined short-range distance (e.g., 3 meters) of each other during transport, such as in an airport, train station, or hotel.
