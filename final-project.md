@@ -1,6 +1,7 @@
 **Course:** CSCI-4270 / CSCI-6712 – Wireless Technologies for the Internet of Things
 
 **Deadline:** 7:00 PM on **December 10, 2025**
+
 **Submission:** Upload as **one zip file** on Brightspace
 
 **Project Teams:** Students must form their project groups (4 students per group) by **Friday, November 21, 2025 at 11:59 PM**. Groups not submitted by the deadline will be assigned randomly.
