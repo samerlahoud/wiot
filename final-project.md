@@ -6,7 +6,7 @@
 
 **Project Teams:** Students must form their project groups (4 students per group) by **Friday, November 21, 2025 at 11:59 PM**. Groups not submitted by the deadline will be assigned randomly.
 
-# Final Project – BLE-Based Luggage cluster Detection System
+# Final Project – BLE-Based Luggage Cluster Detection System
 
 ## 📡 Project Overview
 
@@ -36,7 +36,7 @@ This cluster pattern detection allows for use cases like group-based baggage tra
   * Measure RSSI vs distance between ESP32-C6 devices
   * Define RSSI threshold for clustering
 
-* **cluster detection accuracy**:
+* **Cluster detection accuracy**:
 
   * Deploy 3–4 devices and move them in simulated cluster patterns
   * Introduce deviations and log detection of cluster loss events
