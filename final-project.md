@@ -16,8 +16,6 @@ The system relies on decentralized BLE advertisement and scanning, where each de
 
 This cluster pattern detection allows for use cases like group-based baggage tracking, anomaly alerts when an item strays too far, and possible integration with a smartphone or relay node for remote status updates.
 
----
-
 ## 🧪 Project Features and Evaluation Goals
 
 ### Core Functionality
@@ -58,8 +56,6 @@ This cluster pattern detection allows for use cases like group-based baggage tra
   * Store all logs locally on device
   * Upload logs in bulk over Wi-Fi at the end of the deployment window
 
----
-
 ## 📦 Required Deliverables
 
 | Component               | Description                                                                |
@@ -69,8 +65,6 @@ This cluster pattern detection allows for use cases like group-based baggage tra
 | `plots/`                | RSSI vs distance, detection performance metrics, energy consumption curves |
 | `report.pdf`            | Max 5 pages: methodology, system design, results, and discussion          |
 | `demo.mp4` *(optional)* | Video showing cluster behavior and alert triggering                         |
-
----
 
 ## 📈 Evaluation Criteria
 
